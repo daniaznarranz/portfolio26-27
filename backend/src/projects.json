@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "title": "E-Commerce Premium Dashboard",
+    "description": "Un panel de administración de comercio electrónico de alta fidelidad con análisis en tiempo real, gestión de inventario y visualización de ventas mediante gráficos interactivos.",
+    "tech": ["React", "Node.js", "Express", "ChartJS", "CSS Modules"],
+    "role": "Fullstack Developer",
+    "year": "2026",
+    "github": "https://github.com/example/dashboard",
+    "demo": "https://example.com/dashboard"
+  },
+  {
+    "id": 2,
+    "title": "SaaS Platform Landing Page",
+    "description": "Una landing page corporativa optimizada para SEO con animaciones micro-interactivas fluidas, soporte de modo oscuro/claro y pasarela de pago simulada.",
+    "tech": ["Vue 3", "Vite", "Vanilla CSS", "Pinia", "GSAP"],
+    "role": "Frontend Engineer",
+    "year": "2025",
+    "github": "https://github.com/example/saas-landing",
+    "demo": "https://example.com/saas"
+  },
+  {
+    "id": 3,
+    "title": "Task Flow Planner API",
+    "description": "API REST robusta para la gestión de proyectos colaborativos en tiempo real con autenticación JWT, WebSockets para notificaciones instantáneas y documentación OpenAPI.",
+    "tech": ["Node.js", "Express", "MongoDB", "WebSockets", "JWT"],
+    "role": "Backend Developer",
+    "year": "2026",
+    "github": "https://github.com/example/task-api",
+    "demo": "https://example.com/api/docs"
+  }
+]
