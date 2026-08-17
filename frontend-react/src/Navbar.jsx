@@ -30,7 +30,8 @@ export default function Navbar({ currentView = 'landing', navigateTo }) {
     const observerCallback = (entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
+          const targetId = entry.target.id;
+          setActiveSection(targetId === 'proyectos' ? 'inicio' : targetId);
         }
       });
     };

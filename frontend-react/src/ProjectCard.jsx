@@ -37,7 +37,12 @@ export default function ProjectCard({ project, onSelect }) {
       style={{ cursor: 'pointer' }}
     >
       <div className="project-card-image-wrapper">
-        <img src={project.image} alt={project.title} className="project-card-image" />
+        <img 
+          src={project.image} 
+          alt={project.title} 
+          className="project-card-image" 
+          style={project.containImages ? { objectFit: 'contain', backgroundColor: '#ffffff', padding: '15px' } : {}}
+        />
         <span className="project-card-category">{project.category}</span>
       </div>
       <div className="project-card-content">

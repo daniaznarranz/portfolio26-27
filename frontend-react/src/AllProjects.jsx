@@ -35,6 +35,35 @@ import cesidaIdVertical3 from './assets/CesidaID_Vertical3.jpg';
 import cesidaIdVertical4 from './assets/CesidaID_Vertical4.png';
 import cesidaIdHorizontal2 from './assets/CesidaID_Horizontal2.mp4';
 
+// Import CheesecakeWorld assets
+import cheesecakeWorldPrincipal from './assets/CheesecakeWorld_principal.jpg';
+import cheesecakeWorldVertical1 from './assets/CheesecakeWorld_vertical1.jpg';
+import cheesecakeWorldVertical2 from './assets/CheesecakeWorld_vertical2.jpg';
+import cheesecakeWorldHorizontal1 from './assets/CheesecakeWorld_horizontal1.jpg';
+import cheesecakeWorldHorizontal2 from './assets/CheesecakeWorld_horizontal2.jpg';
+import cheesecakeWorldHorizontal3 from './assets/CheesecakeWorld_horizontal3.jpg';
+
+// Import BM Coffee assets
+import bmCoffee1 from './assets/BM_portada horizontal.png';
+import bmCoffee2 from './assets/BM_vertical1.png';
+import bmCoffee3 from './assets/BM_vertical2.jpeg';
+import bmCoffee4 from './assets/Bm_horizontal2.jpeg';
+import bmCoffee5 from './assets/Bm_horizontal3.jpeg';
+
+// Import SalsaGoiko assets
+import salsaGoikoPrincipal from './assets/SalsaGoiko_Horizontalprincipal.jpg';
+import salsaGoikoHorizontal3 from './assets/SalsaGoiko_Horizontal3.png';
+import salsaGoikoHorizontal2 from './assets/SalsaGoiko_Horizontal2.png';
+import salsaGoikoVertical1 from './assets/SalsaGoiko_Vertical1.jpeg';
+import salsaGoikoVertical2 from './assets/SalsaGoiko_Vertical2.jpeg';
+import salsaGoikoVertical3 from './assets/SalsaGoiko_Vertical3.jpeg';
+
+// Import LibroEspeculativo assets
+import libroEspeculativoVideoPrincipal from './assets/LibroEspeculativo_VideoPrincipal.mp4';
+import libroEspeculativoHorizontal1 from './assets/LibroEspeculativo_Horizontal1.jpg';
+import libroEspeculativoVertical1 from './assets/LibroEspeculativo_Vertical1.jpg';
+import libroEspeculativoVertical2 from './assets/LibroEspeculativo_Vertical2.jpg';
+
 const CATEGORIES = [
   { id: 'todos', label: 'Todos' },
   { id: 'design', label: 'Identidad & Branding' },
@@ -169,75 +198,101 @@ export const ALL_PROJECTS = [
     ]
   },
   {
-    image: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=800&q=80',
-    title: 'Aura Skincare ✦ Dirección de Arte',
-    category: 'Identidad & Branding',
-    categoryKey: 'design',
-    description: 'Dirección de arte, fotografía de bodegón de producto y estrategia visual de lanzamiento para cosmética limpia.',
-    technologies: ['Fotografía', 'Dirección de Arte', 'Color Grading', 'Photoshop'],
-    link: '#',
-    client: 'Aura Lab Cosmetics',
-    year: '2025',
-    role: 'Dirección de Arte & Estilismo fotográfico',
-    tagline: 'Campaña visual y dirección creativa para marca cosmética',
-    details: [
-      'Planificación y dirección de arte para la sesión de fotos de lanzamiento de Aura Skincare, una marca comprometida con ingredientes de origen vegetal.',
-      'El estilismo fotográfico se basó en tonos neutros, iluminación diáfana y composición minimalista con piedras y texturas orgánicas para resaltar la pureza y los beneficios del producto.',
-      'El material generado sirvió para estructurar la estrategia de lanzamiento en plataformas digitales, e-commerce y publicidad exterior.'
-    ]
-  },
-  {
-    image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=800&q=80',
-    title: 'Ecosfera NGO ✦ Experiencia Web',
-    category: 'Diseño Digital & UI',
-    categoryKey: 'digital',
-    description: 'Diseño de interfaz interactiva, prototipado de micro-interacciones y UX para una ONG de conservación marina.',
-    technologies: ['UI/UX Design', 'Figma', 'Web Design', 'Design System'],
-    link: '#',
-    client: 'Fundación Ecosfera',
-    year: '2025',
-    role: 'Diseño de Experiencia & Interfaz (UI/UX)',
-    tagline: 'Diseño web interactivo orientado a la conversión y educación',
-    details: [
-      'Rediseño de la experiencia web de la ONG Ecosfera con el propósito de optimizar los flujos de captación de socios, donaciones y divulgación ambiental.',
-      'Se construyó un sistema de diseño adaptable y accesible, introduciendo micro-interacciones interactivas, mapas en tiempo real del impacto de la ONG y componentes web premium.',
-      'El proceso incluyó el prototipado de alta fidelidad en Figma y pruebas de usabilidad con usuarios reales para refinar la interacción.'
-    ]
-  },
-  {
-    image: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80',
-    title: 'Bold Type ✦ Tipografía Experimental',
+    image: cheesecakeWorldPrincipal,
+    title: 'Cheesecake World ✦ Libro de Maquetación e Ilustración',
     category: 'Editorial & Impresos',
     categoryKey: 'editorial',
-    description: 'Creación de una tipografía geométrica modular y serie de carteles de gran formato impresos en risografía.',
-    technologies: ['Diseño de Tipos', 'Risografía', 'Poster Art', 'Glyphs'],
-    link: '#',
-    client: 'Autoedición / Proyecto Personal',
+    description: 'Diseño, maquetación e ilustración para Cheesecake World, un libro visual que explora el universo de las tartas de queso a través de composiciones gráficas detalladas y dirección de arte gastronómica.',
+    technologies: ['Editorial', 'Layout', 'Ilustración', 'Dirección de Arte'],
+    link: '',
+    client: 'Proyecto Personal / Autoedición',
     year: '2025',
-    role: 'Diseño Tipográfico y Cartelismo',
-    tagline: 'Tipografía modular y cartelismo experimental en Risografía',
+    role: 'Diseño Editorial, Ilustración & Maquetación',
+    tagline: 'Un libro visual dedicado al dulce arte de la tarta de queso',
     details: [
-      'Estudio tipográfico modular basado en la geometría racionalista, diseñado digitalmente usando Glyphs y testado en composiciones de gran formato.',
-      'Se produjo una edición limitada de posters impresos artesanalmente en Risografía en Madrid, experimentando con superposición de colores planos de alta intensidad (azul cobalto, amarillo flúor) y la vibrante textura típica de este sistema de impresión.',
-      'El proyecto es un manifiesto de la estética cruda e imperfecta del soporte físico en la era digital.'
+      'Diseño editorial e ilustración del libro Cheesecake World, un proyecto que celebra el universo de la tarta de queso desde una mirada gráfica y contemporánea. La cubierta combina una paleta cromática sobria con ilustraciones sintéticas y repetitivas, creando un patrón reconocible y lúdico que refuerza el carácter del libro.',
+      'El diseño busca convertir la publicación en un objeto atractivo y coleccionable, donde la ilustración y la tipografía dialogan para transmitir cercanía, identidad y coherencia visual, acompañando el contenido de forma clara y sugerente.El diseño busca convertir la publicación en un objeto atractivo y coleccionable, donde la ilustración y la tipografía dialogan para transmitir cercanía, identidad y coherencia visual, acompañando el contenido de forma clara y sugerente.'
+    ],
+    gallery: [
+      { url: cheesecakeWorldVertical1, type: 'half-width' },
+      { url: cheesecakeWorldVertical2, type: 'half-width' },
+      { url: cheesecakeWorldHorizontal1, type: 'full-width' },
+      { url: cheesecakeWorldHorizontal2, type: 'full-width' },
+      { url: cheesecakeWorldHorizontal3, type: 'full-width' }
     ]
   },
   {
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80',
-    title: 'Cacao Cacao ✦ Rebranding Identidad',
-    category: 'Identidad & Branding',
-    categoryKey: 'design',
-    description: 'Identidad visual renovada para una chocolatería artesanal, con ilustraciones personalizadas y bolsas ecológicas.',
-    technologies: ['Rebranding', 'Packaging', 'Ilustración', 'Illustrator'],
-    link: '#',
-    client: 'Cacao Cacao Obrador',
-    year: '2026',
-    role: 'Diseñador de Identidad y Packaging',
-    tagline: 'Rebranding completo de chocolatería tradicional',
+    image: bmCoffee1,
+    title: 'Café BM ✦ Rediseño de Packaging',
+    category: 'Packaging & Ilustración',
+    categoryKey: 'packaging',
+    description: 'Rediseño de la línea de café de marca blanca para BM Supermercados, apostando por una identidad limpia, tipografía contemporánea y un código de color claro para diferenciar las distintas variedades.',
+    technologies: ['Packaging', 'Branding', 'Dirección de Arte', 'Ilustración'],
+    link: '',
+    client: 'BM Supermercados / Proyecto Académico',
+    year: '2025',
+    role: 'Diseño de Packaging & Identidad',
+    tagline: 'Nueva identidad visual y sistema de packaging para la gama de café BM',
     details: [
-      'Rebranding integral para la chocolatería Cacao Cacao con el objetivo de elevar su percepción hacia el mercado artesanal premium.',
-      'El rediseño abarca el logotipo tipográfico, ilustraciones de plantas y frutos del cacao que decoran el papel de envolver y bolsas, y un sistema cromático cálido inspirado en el tostado del grano.',
-      'Se diseñó una línea de embalaje sostenible utilizando papeles rugosos biodegradables que transmiten honestidad y calidad artesana.'
+      'El proyecto consiste en el rediseño integral de la gama de café de marca blanca de BM Supermercados. El objetivo principal era alejar el producto de la estética habitual de las marcas de distribución y dotarlo de una personalidad única, premium y atractiva en el lineal.',
+      'Se ha desarrollado un sistema visual claro basado en ilustraciones y una paleta de color diferenciada para cada variedad (mezcla, descafeinado, natural, etc.). La tipografía limpia y la disposición ordenada de la información mejoran la legibilidad y la identificación del producto por parte del consumidor.',
+      'El resultado es un packaging que transmite calidad y cercanía, revalorizando la marca blanca del supermercado y conectando con un público que valora tanto el diseño cuidado como un buen producto cotidiano.'
+    ],
+    gallery: [
+      { url: bmCoffee2, type: 'auto' },
+      { url: bmCoffee3, type: 'auto' },
+      { url: bmCoffee4, type: 'auto-full' },
+      { url: bmCoffee5, type: 'auto-full' }
+    ]
+  },
+  {
+    image: salsaGoikoPrincipal,
+    title: 'Salsas Goiko ✦ Rediseño de Packaging',
+    category: 'Packaging & Ilustración',
+    categoryKey: 'packaging',
+    description: 'Rediseño de la gama de salsas para llevar de la conocida cadena de hamburgueserías Goiko, potenciando su identidad atrevida y gamberra.',
+    technologies: ['Packaging', 'Branding', 'Dirección de Arte', 'Ilustración'],
+    link: '',
+    client: 'Goiko Grill / Proyecto Académico',
+    year: '2025',
+    role: 'Diseño de Packaging & Dirección de Arte',
+    tagline: 'Nueva identidad visual y sistema de packaging para la gama de salsas Goiko',
+    details: [
+      'El proyecto consiste en el rediseño integral de la gama de salsas para llevar de la conocida cadena de hamburgueserías Goiko. El principal desafío era trasladar la personalidad gamberra, atrevida y cercana de la marca a un formato de packaging reducido pero de gran impacto visual en el punto de venta y en el delivery.',
+      'Se estructuró el diseño a través de un código cromático vibrante y contrastado, facilitando la identificación inmediata de cada salsa (Emmy, Kevin Bacon, Barbacoa, etc.). Además, se incorporaron elementos tipográficos rotundos y desenfadados que sintonizan con el lenguaje y tono característicos de Goiko.',
+      'El resultado final es una familia de packagings coherente y enérgica, que convierte el momento de consumo en una extensión de la experiencia física del restaurante y aporta valor diferencial a las salsas de la marca.'
+    ],
+    gallery: [
+      { url: salsaGoikoHorizontal3, type: 'full-width' },
+      { url: salsaGoikoVertical1, type: 'third-width' },
+      { url: salsaGoikoVertical2, type: 'third-width' },
+      { url: salsaGoikoVertical3, type: 'third-width' },
+      { url: salsaGoikoHorizontal2, type: 'full-width' }
+    ]
+  },
+  {
+    image: libroEspeculativoHorizontal1,
+    video: libroEspeculativoVideoPrincipal,
+    title: 'Guía Práctica ✦ Libro Especulativo',
+    category: 'Editorial & Impresos',
+    categoryKey: 'editorial',
+    description: 'Diseño editorial y desarrollo interactivo para un libro especulativo centrado en la recuperación de la memoria impresa y el valor del papel.',
+    technologies: ['Editorial & Impresos', 'Layout', 'Desarrollo Web', 'Diseño Especulativo'],
+    link: 'https://guia-practica-de-un-libro.vercel.app/',
+    client: 'Proyecto Personal / Autoedición',
+    year: '2025',
+    role: 'Diseñador Editorial & Desarrollador Web',
+    tagline: 'Guía práctica para recuperar los libros',
+    details: [
+      'Un proyecto de diseño especulativo y editorial que explora la preservación física de los libros en un futuro digital, ofreciendo instrucciones físicas y teóricas sobre la durabilidad, el valor del soporte papel y los métodos de conservación creativa.',
+      'La propuesta incluye el diseño del libro físico en sí, prestando especial atención a la tipografía, la composición reticular y la materialidad de la pieza editorial.',
+      'Complementando el libro físico, se ha desarrollado una experiencia web interactiva que funciona como una guía de recuperación dinámica, permitiendo al usuario explorar las diferentes fases del proyecto de forma interactiva y fluida.'
+    ],
+    gallery: [
+      { url: libroEspeculativoHorizontal1, type: 'full-width' },
+      { url: libroEspeculativoVertical1, type: 'half-width' },
+      { url: libroEspeculativoVertical2, type: 'half-width' },
+      { url: libroEspeculativoVideoPrincipal, type: 'full-width' }
     ]
   }
 ];

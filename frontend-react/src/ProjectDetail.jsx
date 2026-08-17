@@ -64,7 +64,12 @@ export default function ProjectDetail({ project, navigateTo }) {
             onClick={(e) => e.stopPropagation()}
           />
         ) : (
-          <img src={project.image} alt={project.title} className="project-hero-media" />
+          <img 
+            src={project.image} 
+            alt={project.title} 
+            className="project-hero-media" 
+            style={project.containImages ? { objectFit: 'contain', backgroundColor: '#ffffff', padding: '20px' } : {}} 
+          />
         )}
       </div>
 
@@ -157,7 +162,12 @@ export default function ProjectDetail({ project, navigateTo }) {
                       onClick={(e) => e.stopPropagation()}
                     />
                   ) : (
-                    <img src={imgUrl} alt={`Showcase view ${idx + 1}`} className="showcase-img" />
+                    <img 
+                      src={imgUrl} 
+                      alt={`Showcase view ${idx + 1}`} 
+                      className="showcase-img" 
+                      style={project.containImages ? { objectFit: 'contain', backgroundColor: '#ffffff', padding: '20px' } : {}}
+                    />
                   )}
                 </div>
               );

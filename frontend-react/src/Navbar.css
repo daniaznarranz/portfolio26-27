@@ -226,7 +226,7 @@
 }
 
 /* Responsive adjustments overrides */
-@media (max-width: 768px) {
+@media (max-width: 968px) {
   .navbar-header {
     padding: 1.25rem 2rem;
   }

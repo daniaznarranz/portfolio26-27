@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import DriftWall from './DriftWall';
@@ -6,12 +6,17 @@ import TextLoop from './TextLoop';
 import AccordionGallery from './AccordionGallery';
 import Navbar from './Navbar';
 import AllProjects, { ALL_PROJECTS } from './AllProjects';
+import ScrollTrigger from 'gsap/ScrollTrigger';
 import brumaHero from './assets/bruma_hero.jpg';
 import ProjectDetail from './ProjectDetail';
 import developerPortrait from './assets/developer_portrait.png';
 import tdcHorizontal1 from './assets/TDC_horizontal_1.jpg';
 import inputPortada from './assets/Input_Portada.jpg';
 import cesidaIdHorizontal1 from './assets/CesidaID_Horizontal1.jpg';
+import cheesecakeWorldPrincipal from './assets/CheesecakeWorld_principal.jpg';
+import bmCoffee1 from './assets/BM_portada horizontal.png';
+import salsaGoikoPrincipal from './assets/SalsaGoiko_Horizontalprincipal.jpg';
+import libroEspeculativoHorizontal1 from './assets/LibroEspeculativo_Horizontal1.jpg';
 import drift1 from './assets/drift_1.jpg';
 import drift2 from './assets/drift_2.jpg';
 import drift3 from './assets/drift_3.jpg';
@@ -26,7 +31,7 @@ import drift11 from './assets/drift_11.jpg';
 import drift12 from './assets/drift_12.jpg';
 import './App.css';
 
-gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const DRIFT_ITEMS = [
   { image: drift1, title: 'Cata la Lata', href: '#' },
@@ -72,6 +77,16 @@ function App() {
   const mainRef = useRef(null);
   const [currentView, setCurrentView] = useState('landing');
   const [selectedProject, setSelectedProject] = useState(null);
+  const [isTabletOrMobile, setIsTabletOrMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsTabletOrMobile(window.innerWidth <= 968);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleSelectProject = (project) => {
     setSelectedProject(project);
@@ -82,30 +97,38 @@ function App() {
   const tdcProject = ALL_PROJECTS.find(p => p.title.toLowerCase().includes('canal') || p.title.toLowerCase().includes('tdc'));
   const inputProject = ALL_PROJECTS.find(p => p.title.toLowerCase().includes('input'));
   const cesidaIdProject = ALL_PROJECTS.find(p => p.title.toLowerCase().includes('cesida') && p.title.toLowerCase().includes('identidad'));
+  const cesidaMotionProject = ALL_PROJECTS.find(p => p.title.toLowerCase().includes('cesida') && p.title.toLowerCase().includes('motion'));
+  const cheesecakeProject = ALL_PROJECTS.find(p => p.title.toLowerCase().includes('cheesecake'));
+  const bmCoffeeProject = ALL_PROJECTS.find(p => p.title.toLowerCase().includes('bm'));
+  const goikoProject = ALL_PROJECTS.find(p => p.title.toLowerCase().includes('goiko'));
+  const libroEspeculativoProject = ALL_PROJECTS.find(p => p.title.toLowerCase().includes('especulativo'));
 
   const workItems = [
-    { image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80', label: 'Studio Chroma ✦ Identidad de Marca', link: '#' },
+    {
+      image: libroEspeculativoHorizontal1,
+      label: 'Guía Práctica ✦ Libro Especulativo',
+      onClick: () => handleSelectProject(libroEspeculativoProject)
+    },
+    { 
+      image: salsaGoikoPrincipal, 
+      label: 'Salsas Goiko ✦ Rediseño de Packaging', 
+      onClick: () => handleSelectProject(goikoProject)
+    },
     { 
       image: brumaHero, 
       label: 'Bruma ✦ Proyecto Experimental', 
       onClick: () => handleSelectProject(brumaProject) 
     },
-    { 
-      image: tdcHorizontal1, 
-      label: 'Teatros del Canal ✦ Rediseño de Identidad', 
-      onClick: () => handleSelectProject(tdcProject) 
+    {
+      image: drift3,
+      label: 'Cesida ✦ Motion Graphics',
+      onClick: () => handleSelectProject(cesidaMotionProject)
     },
     { 
       image: inputPortada, 
       label: 'Input ✦ Revista de la ESD', 
       onClick: () => handleSelectProject(inputProject) 
-    },
-    { 
-      image: cesidaIdHorizontal1, 
-      label: 'Cesida ✦ Rediseño de Identidad', 
-      onClick: () => handleSelectProject(cesidaIdProject) 
-    },
-    { image: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=800&q=80', label: 'Aura Skincare ✦ Dirección de Arte', link: '#' }
+    }
   ];
 
   const navigateTo = (view) => {
@@ -222,6 +245,52 @@ function App() {
         '-=0.3'
       );
   }, { scope: mainRef, dependencies: [currentView, hasAnimatedLanding] });
+  
+  // Animation for Skills Section on Landing View
+  useGSAP(() => {
+    if (currentView !== 'landing') return;
+
+    const skillBars = gsap.utils.toArray('.skill-progress-fill');
+    
+    skillBars.forEach(bar => {
+      const targetPercent = parseInt(bar.getAttribute('data-percent'), 10);
+      const percentLabel = bar.closest('.skill-item').querySelector('.skill-percent');
+      
+      // Animate progress bar fill width
+      gsap.fromTo(bar, 
+        { width: '0%' },
+        {
+          width: `${targetPercent}%`,
+          duration: 1.6,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: bar,
+            start: 'top 92%',
+            toggleActions: 'play none none none'
+          }
+        }
+      );
+
+      // Animate percentage text count-up
+      const counter = { value: 0 };
+      gsap.to(counter, {
+        value: targetPercent,
+        duration: 1.6,
+        ease: 'power2.out',
+        roundProps: 'value',
+        onUpdate: () => {
+          if (percentLabel) {
+            percentLabel.textContent = `${counter.value}%`;
+          }
+        },
+        scrollTrigger: {
+          trigger: bar,
+          start: 'top 92%',
+          toggleActions: 'play none none none'
+        }
+      });
+    });
+  }, { scope: mainRef, dependencies: [currentView] });
 
   return (
     <div ref={mainRef}>
@@ -313,11 +382,12 @@ function App() {
                     items={workItems}
                     defaultIndex={2}
                     expandRatio={0.58}
-                    trigger="hover"
+                    trigger={isTabletOrMobile ? "click" : "hover"}
                     grayscale={false}
-                    height={620}
+                    height={isTabletOrMobile ? 400 : 620}
                     gap={12}
                     radius={20}
+                    orientation={isTabletOrMobile ? "vertical" : "horizontal"}
                   />
                   <div className="works-view-all">
                     <button onClick={() => navigateTo('projects')} className="btn btn-secondary">
@@ -353,19 +423,70 @@ function App() {
                     </div>
                   </div>
 
-                  {/* Card 3: Solid Coral Accent (Ideas to Canvas) */}
-                  <div className="about-card about-card-accent">
-                    <div className="about-accent-content">
-                      <h4 className="about-accent-title">IDEAS AL PAPEL Y A LA PANTALLA.</h4>
-                      <p className="about-accent-desc">Proceso creativo & Motion.</p>
-                    </div>
-                  </div>
+                  {/* Card 3: Skills Bento Card */}
+                  <div className="about-card about-card-skills glass-card">
+                    <h3 className="about-skills-title">HABILIDADES & HERRAMIENTAS</h3>
+                    <div className="about-skills-grid">
+                      <div className="skill-item">
+                        <div className="skill-info">
+                          <span className="skill-name">Figma</span>
+                          <span className="skill-percent">0%</span>
+                        </div>
+                        <div className="skill-progress-bg">
+                          <div className="skill-progress-fill" data-percent="95" />
+                        </div>
+                      </div>
 
-                  {/* Card 4: Thoughts serif italic */}
-                  <div className="about-card about-card-quote glass-card">
-                    <p className="about-quote-text">
-                      "Diseño alegre para marcas felices y proyectos audaces."
-                    </p>
+                      <div className="skill-item">
+                        <div className="skill-info">
+                          <span className="skill-name">Adobe Photoshop</span>
+                          <span className="skill-percent">0%</span>
+                        </div>
+                        <div className="skill-progress-bg">
+                          <div className="skill-progress-fill" data-percent="90" />
+                        </div>
+                      </div>
+
+                      <div className="skill-item">
+                        <div className="skill-info">
+                          <span className="skill-name">Adobe Illustrator</span>
+                          <span className="skill-percent">0%</span>
+                        </div>
+                        <div className="skill-progress-bg">
+                          <div className="skill-progress-fill" data-percent="85" />
+                        </div>
+                      </div>
+
+                      <div className="skill-item">
+                        <div className="skill-info">
+                          <span className="skill-name">Diseño Editorial & Layout</span>
+                          <span className="skill-percent">0%</span>
+                        </div>
+                        <div className="skill-progress-bg">
+                          <div className="skill-progress-fill" data-percent="90" />
+                        </div>
+                      </div>
+
+                      <div className="skill-item">
+                        <div className="skill-info">
+                          <span className="skill-name">HTML / CSS / JavaScript</span>
+                          <span className="skill-percent">0%</span>
+                        </div>
+                        <div className="skill-progress-bg">
+                          <div className="skill-progress-fill" data-percent="80" />
+                        </div>
+                      </div>
+
+                      <div className="skill-item">
+                        <div className="skill-info">
+                          <span className="skill-name">Motion Graphics</span>
+                          <span className="skill-percent">0%</span>
+                        </div>
+                        <div className="skill-progress-bg">
+                          <div className="skill-progress-fill" data-percent="85" />
+                        </div>
+                      </div>
+                    </div>
                   </div>
 
                 </div>
@@ -375,7 +496,7 @@ function App() {
             {/* TextLoop Section Separator */}
             <div className="loop-separator">
               <TextLoop
-                text="BRANDING ✦ DIRECCIÓN DE ARTE ✦ ILLUSTRATION ✦ DISEÑO EDITORIAL ✦ PACKAGING ✦ DIGITAL ART ✦ ANIMACIÓN ✦"
+                text="BRANDING ✦ DIRECCIÓN DE ARTE ✦ ILUSTRACIÓN ✦ DISEÑO EDITORIAL ✦ PACKAGING ✦ ARTE DIGITAL ✦ ANIMACIÓN"
                 shape="line"
                 speed={45}
                 direction="forward"

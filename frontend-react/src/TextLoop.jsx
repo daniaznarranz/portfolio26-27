@@ -3,43 +3,40 @@ import { gsap } from 'gsap';
 
 import './TextLoop.css';
 
-const VIEW_W = 1200;
-const VIEW_H = 520;
-const CX = VIEW_W / 2;
-const CY = VIEW_H / 2;
-const EDGE_PAD = 6;
-
-const buildPath = (shape, curviness, ribbonWidth) => {
+const buildPath = (shape, curviness, ribbonWidth, width, height) => {
   const c = Math.max(0, curviness);
-  const room = Math.max(20, CY - Math.max(0, ribbonWidth) / 2 - EDGE_PAD);
+  const cx = width / 2;
+  const cy = height / 2;
+  const edgePad = 6;
+  const room = Math.max(20, cy - Math.max(0, ribbonWidth) / 2 - edgePad);
 
   switch (shape) {
     case 'circle': {
       const r = Math.min(90 + c * 0.95, room);
-      return `M ${CX - r} ${CY} A ${r} ${r} 0 1 1 ${CX + r} ${CY} A ${r} ${r} 0 1 1 ${CX - r} ${CY} Z`;
+      return `M ${cx - r} ${cy} A ${r} ${r} 0 1 1 ${cx + r} ${cy} A ${r} ${r} 0 1 1 ${cx - r} ${cy} Z`;
     }
     case 'infinity': {
       const r = 150 + c * 1.4;
       const h = Math.min(60 + c * 0.95, room);
       return [
-        `M ${CX} ${CY}`,
-        `C ${CX + r * 0.55} ${CY - h} ${CX + r} ${CY - h} ${CX + r} ${CY}`,
-        `C ${CX + r} ${CY + h} ${CX + r * 0.55} ${CY + h} ${CX} ${CY}`,
-        `C ${CX - r * 0.55} ${CY - h} ${CX - r} ${CY - h} ${CX - r} ${CY}`,
-        `C ${CX - r} ${CY + h} ${CX - r * 0.55} ${CY + h} ${CX} ${CY}`,
+        `M ${cx} ${cy}`,
+        `C ${cx + r * 0.55} ${cy - h} ${cx + r} ${cy - h} ${cx + r} ${cy}`,
+        `C ${cx + r} ${cy + h} ${cx + r * 0.55} ${cy + h} ${cx} ${cy}`,
+        `C ${cx - r * 0.55} ${cy - h} ${cx - r} ${cy - h} ${cx - r} ${cy}`,
+        `C ${cx - r} ${cy + h} ${cx - r * 0.55} ${cy + h} ${cx} ${cy}`,
         'Z'
       ].join(' ');
     }
     case 'arch': {
       const rise = Math.min(120 + c * 1.1, room * 2);
-      return `M 120 ${CY + rise / 2} Q ${CX} ${CY - rise * 1.5} ${VIEW_W - 120} ${CY + rise / 2}`;
+      return `M 120 ${cy + rise / 2} Q ${cx} ${cy - rise * 1.5} ${width - 120} ${cy + rise / 2}`;
     }
     case 'line':
-      return `M -320 ${CY} L ${VIEW_W + 320} ${CY}`;
+      return `M -600 ${cy} L ${width + 600} ${cy}`;
     case 'wave':
     default: {
       const a = Math.min(c * 2.2, room * 2);
-      return `M -320 ${CY} Q -160 ${CY - a} 0 ${CY} T 320 ${CY} T 640 ${CY} T 960 ${CY} T 1280 ${CY} T ${VIEW_W + 320} ${CY}`;
+      return `M -600 ${cy} Q -300 ${cy - a} 0 ${cy} T 300 ${cy} T 600 ${cy} T 900 ${cy} T 1200 ${cy} T ${width + 600} ${cy}`;
     }
   }
 };
@@ -70,12 +67,30 @@ const TextLoop = ({
   const headRef = useRef(null);
   const tailRef = useRef(null);
 
-  const [metrics, setMetrics] = useState({ length: 0, reps: 1 });
+  const [metrics, setMetrics] = useState({ length: 0, reps: 2 });
+  const [containerSize, setContainerSize] = useState({ width: 1200, height: 64 });
 
   const rawId = useId();
   const pathId = `text-loop-${rawId.replace(/:/g, '')}`;
 
-  const d = useMemo(() => path || buildPath(shape, curviness, ribbonWidth), [path, shape, curviness, ribbonWidth]);
+  const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
+
+  // Track parent element dimensions dynamically
+  useIsomorphicLayoutEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+    const ro = new ResizeObserver(([entry]) => {
+      setContainerSize({
+        width: entry.contentRect.width || 1200,
+        height: entry.contentRect.height || 64
+      });
+    });
+    ro.observe(root);
+    return () => ro.disconnect();
+  }, []);
+
+  const isClosed = shape === 'circle' || shape === 'infinity';
+  const d = useMemo(() => path || buildPath(shape, curviness, ribbonWidth, containerSize.width, containerSize.height), [path, shape, curviness, ribbonWidth, containerSize]);
 
   const unit = useMemo(() => {
     const base = uppercase ? String(text).toUpperCase() : String(text);
@@ -88,7 +103,8 @@ const TextLoop = ({
     [fontSize, fontWeight, letterSpacing]
   );
 
-  useLayoutEffect(() => {
+  // Measure text length and repetition metrics dynamically
+  useIsomorphicLayoutEffect(() => {
     const pathEl = pathRef.current;
     const measureEl = measureRef.current;
     if (!pathEl || !measureEl) return undefined;
@@ -105,9 +121,12 @@ const TextLoop = ({
       } catch {
         return;
       }
-      if (!length) return;
+      if (!length || !unitWidth) return;
 
-      const reps = unitWidth > 0 ? Math.max(1, Math.round(length / unitWidth)) : 1;
+      const reps = isClosed
+        ? Math.max(1, Math.round(length / unitWidth))
+        : Math.max(2, Math.ceil(length / unitWidth) + 1);
+
       setMetrics(prev => (prev.length === length && prev.reps === reps ? prev : { length, reps }));
     };
 
@@ -119,30 +138,48 @@ const TextLoop = ({
     return () => {
       cancelled = true;
     };
-  }, [d, unit, fontSize, fontWeight, letterSpacing]);
+  }, [d, unit, fontSize, fontWeight, letterSpacing, isClosed]);
 
+  // Animate startOffset of the textPath
   useEffect(() => {
     const { length } = metrics;
     const head = headRef.current;
-    const tail = tailRef.current;
-    if (!head || !tail || !length) return undefined;
+    if (!head || !length) return undefined;
+
+    const measureEl = measureRef.current;
+    let unitWidth = 0;
+    try {
+      unitWidth = measureEl.getComputedTextLength();
+    } catch {}
+    if (!unitWidth) return undefined;
 
     const apply = offset => {
-      const partner = offset >= 0 ? offset - length : offset + length;
-      head.setAttribute('startOffset', String(offset));
-      tail.setAttribute('startOffset', String(partner));
+      if (isClosed) {
+        const partner = offset >= 0 ? offset - length : offset + length;
+        head.setAttribute('startOffset', String(offset));
+        if (tailRef.current) tailRef.current.setAttribute('startOffset', String(partner));
+      } else {
+        head.setAttribute('startOffset', String(offset));
+      }
     };
 
-    apply(0);
+    const startVal = isClosed ? 0 : 600;
+    apply(startVal);
 
     const prefersReduced =
       typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReduced || speed <= 0) return undefined;
 
-    const state = { offset: 0 };
+    const state = { offset: startVal };
+    const targetVal = isClosed
+      ? (direction === 'reverse' ? -length : length)
+      : (direction === 'reverse' ? 600 + unitWidth : 600 - unitWidth);
+    
+    const distance = Math.abs(targetVal - startVal);
+
     const tween = gsap.to(state, {
-      offset: direction === 'reverse' ? -length : length,
-      duration: length / speed,
+      offset: targetVal,
+      duration: distance / speed,
       ease: 'none',
       repeat: -1,
       onUpdate: () => apply(state.offset)
@@ -164,16 +201,16 @@ const TextLoop = ({
         root.removeEventListener('pointerleave', resume);
       }
     };
-  }, [metrics, speed, direction, pauseOnHover]);
+  }, [metrics, speed, direction, pauseOnHover, isClosed]);
 
   const loopText = unit.repeat(metrics.reps);
-  const fitLength = metrics.length || undefined;
+  const fitLength = isClosed ? metrics.length : undefined;
 
   return (
     <div ref={rootRef} className={`text-loop ${className}`.trim()} style={style}>
       <svg
         className="text-loop-svg"
-        viewBox={`0 0 ${VIEW_W} ${VIEW_H}`}
+        viewBox={`0 0 ${containerSize.width} ${containerSize.height}`}
         preserveAspectRatio="xMidYMid slice"
         role="img"
         aria-label={text}
@@ -194,16 +231,18 @@ const TextLoop = ({
         </text>
 
         <text className="text-loop-text" style={textStyle} fill={color} dominantBaseline="central" aria-hidden="true">
-          <textPath ref={headRef} href={`#${pathId}`} startOffset={0} textLength={fitLength} lengthAdjust="spacing">
+          <textPath ref={headRef} href={`#${pathId}`} startOffset={isClosed ? 0 : 600} textLength={fitLength} lengthAdjust="spacing">
             {loopText}
           </textPath>
         </text>
 
-        <text className="text-loop-text" style={textStyle} fill={color} dominantBaseline="central" aria-hidden="true">
-          <textPath ref={tailRef} href={`#${pathId}`} startOffset={0} textLength={fitLength} lengthAdjust="spacing">
-            {loopText}
-          </textPath>
-        </text>
+        {isClosed && (
+          <text className="text-loop-text" style={textStyle} fill={color} dominantBaseline="central" aria-hidden="true">
+            <textPath ref={tailRef} href={`#${pathId}`} startOffset={0} textLength={fitLength} lengthAdjust="spacing">
+              {loopText}
+            </textPath>
+          </text>
+        )}
       </svg>
     </div>
   );

@@ -2,7 +2,8 @@
   min-height: 100vh;
   width: 100%;
   background-color: var(--bg-primary);
-  padding: 120px 4rem 6rem 4rem; /* Top padding to offset navbar */
+  padding: 120px 4rem 6rem 4rem;
+  /* Top padding to offset navbar */
   box-sizing: border-box;
 }
 
@@ -257,7 +258,7 @@
 
 .project-showcase-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 1.5rem;
   width: calc(100vw - 2rem);
   position: relative;
@@ -279,13 +280,33 @@
 }
 
 .showcase-img-card.full-width {
-  grid-column: span 2;
+  grid-column: span 6;
   aspect-ratio: 16/9;
 }
 
 .showcase-img-card.half-width {
-  grid-column: span 1;
+  grid-column: span 3;
   aspect-ratio: 3/4;
+}
+
+.showcase-img-card.third-width {
+  grid-column: span 2;
+  aspect-ratio: 3/4;
+}
+
+.showcase-img-card.auto {
+  grid-column: span 3;
+  aspect-ratio: auto;
+}
+
+.showcase-img-card.auto-full {
+  grid-column: span 6;
+  aspect-ratio: auto;
+}
+
+.showcase-img-card.auto .showcase-img,
+.showcase-img-card.auto-full .showcase-img {
+  width: 100%;
 }
 
 .showcase-img {
@@ -325,7 +346,7 @@
   .project-detail-view {
     padding: 100px 2rem 4rem 2rem;
   }
-  
+
   .project-detail-header {
     flex-direction: column;
     align-items: flex-start;
@@ -343,8 +364,15 @@
   }
 
   .project-case-study {
+    grid-template-columns: 1fr 2fr;
+    gap: 2.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .project-case-study {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: 2rem;
   }
 
   .project-showcase-grid {
@@ -366,13 +394,24 @@
     grid-column: span 1;
     aspect-ratio: 3/4;
   }
+
+  .showcase-img-card.third-width {
+    grid-column: span 1;
+    aspect-ratio: 3/4;
+  }
+
+  .showcase-img-card.auto,
+  .showcase-img-card.auto-full {
+    grid-column: span 1;
+    aspect-ratio: auto;
+  }
 }
 
 @media (max-width: 580px) {
   .project-hero-media-wrapper {
     width: calc(100vw - 2rem);
   }
-  
+
   .project-showcase-grid {
     width: calc(100vw - 2rem);
   }
@@ -457,11 +496,23 @@
 }
 
 @keyframes lightboxFadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes lightboxZoomIn {
-  from { transform: scale(0.93); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+  from {
+    transform: scale(0.93);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
