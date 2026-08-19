@@ -147,6 +147,7 @@
   z-index: 3;
 }
 
+.project-card:hover .project-card-link,
 .project-card-link:hover {
   color: var(--color-primary);
   transform: translateX(4px);

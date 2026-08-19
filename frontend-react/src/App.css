@@ -361,6 +361,7 @@
   align-items: center;
   height: 100%;
   min-height: 480px;
+  padding: 0;
 }
 
 .about-badge {
@@ -392,12 +393,10 @@
 }
 
 .about-portrait-img {
-  width: 90%;
-  height: 92%;
-  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  filter: drop-shadow(0 4px 15px rgba(26, 24, 25, 0.1));
-  /* Remove grayscale to make it friendly and natural */
 }
 
 .about-card-portrait:hover .about-portrait-img {
@@ -435,7 +434,7 @@
   width: 100%;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 968px) {
   .about-skills-grid {
     grid-template-columns: 1fr;
     gap: 1.25rem;
@@ -759,79 +758,78 @@
   margin-top: 3.5rem;
 }
 
-/* Floating Graphic Shapes Background */
-.floating-shapes-container {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.floating-shape {
-  position: absolute;
-  pointer-events: none;
-  opacity: 0.18;
-  animation: float-around 20s infinite linear;
-}
-
-.shape-star {
-  width: 45px;
-  height: 45px;
-  top: 18%;
-  left: 8%;
-  color: var(--color-primary);
-  animation-duration: 22s;
-}
-
-.shape-circle {
-  width: 80px;
-  height: 80px;
-  top: 62%;
-  left: 4%;
-  color: #D1D1D6;
-  animation-duration: 32s;
-  animation-direction: reverse;
-}
-
-.shape-donut {
-  width: 55px;
-  height: 55px;
-  top: 76%;
-  left: 38%;
-  color: #E5E5EA;
-  animation-duration: 25s;
-}
-
-.shape-squiggle {
-  width: 70px;
-  height: 40px;
-  top: 24%;
-  left: 44%;
-  color: var(--color-primary);
-  animation-duration: 28s;
-}
-
-@keyframes float-around {
-  0% {
-    transform: translate(0, 0) rotate(0deg);
+/* Intensive Mobile Responsive Optimizations */
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2.2rem;
+    line-height: 1.2;
+    margin-bottom: 1.25rem;
   }
 
-  25% {
-    transform: translate(15px, -20px) rotate(90deg);
+  .hero-subtitle {
+    font-size: 0.95rem;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
   }
 
-  50% {
-    transform: translate(30px, 0px) rotate(180deg);
+  .hero-desc {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
   }
 
-  75% {
-    transform: translate(15px, 20px) rotate(270deg);
+  .works-section,
+  .about-section,
+  .contact-section {
+    padding: 4rem 1rem !important; /* Force compact padding on tiny screens */
   }
 
-  100% {
-    transform: translate(0, 0) rotate(360deg);
+  .section-title {
+    font-size: 2rem !important;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .section-desc {
+    font-size: 0.95rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .about-bg-text {
+    margin-bottom: 1.5rem;
+  }
+
+  .about-card-main {
+    padding: 2.5rem 1.25rem !important;
+  }
+
+  .about-card-main .about-card-title {
+    font-size: 1.7rem;
+  }
+
+  .about-card-skills {
+    padding: 2rem 1.25rem !important;
+  }
+
+  .about-skills-title {
+    font-size: 1.4rem;
+  }
+
+  .contact-card {
+    padding: 1.5rem 1rem !important;
+    gap: 1.5rem;
+  }
+
+  .contact-name {
+    font-size: 1.7rem;
+  }
+
+  .contact-detail-item {
+    font-size: 0.9rem;
+    word-break: break-all;
+  }
+
+  .contact-actions {
+    gap: 0.75rem;
   }
 }

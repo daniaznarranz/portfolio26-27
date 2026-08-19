@@ -40,6 +40,7 @@ const AccordionGallery = ({
   const tlRef = useRef(null);
   const firstRunRef = useRef(true);
   const mediaSizeRef = useRef(320);
+  const pointerDownRef = useRef(false);
 
   const vertical = orientation === 'vertical';
   const count = items.length;
@@ -80,18 +81,18 @@ const AccordionGallery = ({
           const shift = drift * parallax * mediaSize * 0.06;
           const gray = grayscale ? (isActive ? 0 : 1) : 0;
           tl.to(
-            media,
-            {
-              xPercent: -50,
-              yPercent: -50,
-              x: vertical ? 0 : isActive ? 0 : shift,
-              y: vertical ? (isActive ? 0 : shift) : 0,
-              '--ag-gray': gray,
-              '--ag-dim': isActive ? 0 : 0.35,
-              duration: dur,
-              ease
-            },
-            0
+              media,
+              {
+                xPercent: -50,
+                yPercent: -50,
+                x: vertical ? 0 : isActive ? 0 : shift,
+                y: vertical ? (isActive ? 0 : shift) : 0,
+                '--ag-gray': gray,
+                '--ag-dim': isActive ? 0 : 0.35,
+                duration: dur,
+                ease
+              },
+              0
           );
         }
 
@@ -203,9 +204,16 @@ const AccordionGallery = ({
             className={`ag-panel${isActive ? ' ag-panel--active' : ''}`}
             style={{ borderRadius: `${radius}px` }}
             href={item.link || (item.onClick ? '#' : undefined)}
+            onMouseDown={() => { pointerDownRef.current = true; }}
+            onTouchStart={() => { pointerDownRef.current = true; }}
             onClick={e => handleClick(i, e)}
             onMouseEnter={() => handleEnter(i)}
-            onFocus={() => setActive(i)}
+            onFocus={() => {
+              if (!pointerDownRef.current) {
+                setActive(i);
+              }
+              pointerDownRef.current = false;
+            }}
             onKeyDown={e => handleKeyDown(i, e)}
             role="listitem"
             tabIndex={0}

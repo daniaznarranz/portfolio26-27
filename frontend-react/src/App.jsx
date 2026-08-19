@@ -9,7 +9,7 @@ import AllProjects, { ALL_PROJECTS } from './AllProjects';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import brumaHero from './assets/bruma_hero.jpg';
 import ProjectDetail from './ProjectDetail';
-import developerPortrait from './assets/developer_portrait.png';
+import developerPortrait from './assets/Foto sobre mi.jpeg';
 import tdcHorizontal1 from './assets/TDC_horizontal_1.jpg';
 import inputPortada from './assets/Input_Portada.jpg';
 import cesidaIdHorizontal1 from './assets/CesidaID_Horizontal1.jpg';
@@ -52,27 +52,6 @@ const DRIFT_ITEMS = [
 
 const PRELOADER_COLORS = ['#FF6000', '#1A1819', '#4B5563', '#374151'];
 
-const FloatingShapes = () => (
-  <div className="floating-shapes-container">
-    {/* Star shape */}
-    <svg className="floating-shape shape-star" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.787 1.4 8.168L12 18.896l-7.334 3.857 1.4-8.168L.132 9.21l8.2-1.192z" />
-    </svg>
-    {/* Circle shape */}
-    <svg className="floating-shape shape-circle" viewBox="0 0 100 100" fill="currentColor">
-      <circle cx="50" cy="50" r="40" />
-    </svg>
-    {/* Donut shape */}
-    <svg className="floating-shape shape-donut" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="18">
-      <circle cx="50" cy="50" r="36" />
-    </svg>
-    {/* Squiggle shape */}
-    <svg className="floating-shape shape-squiggle" viewBox="0 0 100 40" fill="none" stroke="currentColor" strokeWidth="10" strokeLinecap="round">
-      <path d="M10,20 Q25,5 40,20 T70,20 T100,20" />
-    </svg>
-  </div>
-);
-
 function App() {
   const mainRef = useRef(null);
   const [currentView, setCurrentView] = useState('landing');
@@ -109,25 +88,25 @@ function App() {
       label: 'Guía Práctica ✦ Libro Especulativo',
       onClick: () => handleSelectProject(libroEspeculativoProject)
     },
-    { 
-      image: salsaGoikoPrincipal, 
-      label: 'Salsas Goiko ✦ Rediseño de Packaging', 
+    {
+      image: salsaGoikoPrincipal,
+      label: 'Salsas Goiko ✦ Rediseño de Packaging',
       onClick: () => handleSelectProject(goikoProject)
     },
-    { 
-      image: brumaHero, 
-      label: 'Bruma ✦ Proyecto Experimental', 
-      onClick: () => handleSelectProject(brumaProject) 
+    {
+      image: brumaHero,
+      label: 'Bruma ✦ Proyecto Experimental',
+      onClick: () => handleSelectProject(brumaProject)
     },
     {
       image: drift3,
       label: 'Cesida ✦ Motion Graphics',
       onClick: () => handleSelectProject(cesidaMotionProject)
     },
-    { 
-      image: inputPortada, 
-      label: 'Input ✦ Revista de la ESD', 
-      onClick: () => handleSelectProject(inputProject) 
+    {
+      image: inputPortada,
+      label: 'Input ✦ Revista de la ESD',
+      onClick: () => handleSelectProject(inputProject)
     }
   ];
 
@@ -245,19 +224,19 @@ function App() {
         '-=0.3'
       );
   }, { scope: mainRef, dependencies: [currentView, hasAnimatedLanding] });
-  
+
   // Animation for Skills Section on Landing View
   useGSAP(() => {
     if (currentView !== 'landing') return;
 
     const skillBars = gsap.utils.toArray('.skill-progress-fill');
-    
+
     skillBars.forEach(bar => {
       const targetPercent = parseInt(bar.getAttribute('data-percent'), 10);
       const percentLabel = bar.closest('.skill-item').querySelector('.skill-percent');
-      
+
       // Animate progress bar fill width
-      gsap.fromTo(bar, 
+      gsap.fromTo(bar,
         { width: '0%' },
         {
           width: `${targetPercent}%`,
@@ -318,18 +297,15 @@ function App() {
           <>
             {/* Split-Screen Main Layout */}
             <div className="app-container" id="inicio">
-              {/* Floating Decorative Shapes for Graphic Design Aesthetic */}
-              <FloatingShapes />
-
               {/* Left Content Panel */}
               <div className="left-panel">
                 <main className="hero-content">
-                  <span className="hero-subtitle">Diseño Gráfico & Dirección de Arte</span>
+                  <span className="hero-subtitle">Diseño Gráfico, UX/UI & Product Design</span>
                   <h1 className="hero-title">
                     Dando vida a ideas a través del <span className="text-highlight">diseño visual</span>
                   </h1>
                   <p className="hero-desc">
-                    Especializado en identidad de marca, dirección de arte, diseño editorial y experiencias digitales alegres. Creo universos visuales que conectan de forma memorable y con un toque de magia en movimiento.
+                    Diseñador integral con especial interés en product design, desarrollo web y UX/UI, además de branding, diseño editorial y animación. Creo experiencias interactivas y universos visuales que conectan de forma memorable.
                   </p>
                   <div className="hero-actions">
                     <a href="#proyectos" onClick={(e) => { e.preventDefault(); navigateTo('projects'); }} className="btn btn-primary">
@@ -408,16 +384,16 @@ function App() {
 
                   {/* Card 1: Main Copy */}
                   <div className="about-card about-card-main glass-card">
-                    <h3 className="about-card-title">DISEÑO CON PROPÓSITO & DIRECCIÓN DE ARTE</h3>
+                    <h3 className="about-card-title">DISEÑO GRÁFICO, UX/UI & PRODUCT DESIGN</h3>
                     <p className="about-card-text">
-                      Creo firmemente en el poder del diseño para contar historias, transmitir emociones y conectar personas. Combino la rigurosidad tipográfica, el juego cromático y el movimiento para dar vida a marcas audaces y experiencias visuales inolvidables.
+                      Soy Daniel Aznar, diseñador gráfico con especial interés en entornos digitales. Me gusta entender bien cada proyecto antes de empezar, cuidar el proceso y llegar a soluciones pensadas y bien ejecutadas. Disfruto trabajando en equipo, comunicando de forma clara y aportando valor real, combinando criterio visual, tendencias actuales y una ejecución cuidada.
                     </p>
                     <div className="about-signature">Daniel Aznar</div>
                   </div>
 
                   {/* Card 2: Cutout Portrait */}
                   <div className="about-card about-card-portrait glass-card">
-                    <span className="about-badge">DISEÑADOR GRÁFICO</span>
+                    <span className="about-badge">GRÁFICO, UX/UI & PRODUCT DESIGNER</span>
                     <div className="about-portrait-wrapper">
                       <img src={developerPortrait} alt="Developer Cutout Portrait" className="about-portrait-img" />
                     </div>
@@ -429,7 +405,7 @@ function App() {
                     <div className="about-skills-grid">
                       <div className="skill-item">
                         <div className="skill-info">
-                          <span className="skill-name">Figma</span>
+                          <span className="skill-name">Figma / Product Design</span>
                           <span className="skill-percent">0%</span>
                         </div>
                         <div className="skill-progress-bg">
@@ -439,27 +415,27 @@ function App() {
 
                       <div className="skill-item">
                         <div className="skill-info">
-                          <span className="skill-name">Adobe Photoshop</span>
+                          <span className="skill-name">Suite Adobe / PS / AI / ID </span>
                           <span className="skill-percent">0%</span>
                         </div>
                         <div className="skill-progress-bg">
-                          <div className="skill-progress-fill" data-percent="90" />
+                          <div className="skill-progress-fill" data-percent="87" />
                         </div>
                       </div>
 
                       <div className="skill-item">
                         <div className="skill-info">
-                          <span className="skill-name">Adobe Illustrator</span>
+                          <span className="skill-name">Diseño WEB / Desarrollo WEB</span>
                           <span className="skill-percent">0%</span>
                         </div>
                         <div className="skill-progress-bg">
-                          <div className="skill-progress-fill" data-percent="85" />
+                          <div className="skill-progress-fill" data-percent="95" />
                         </div>
                       </div>
 
                       <div className="skill-item">
                         <div className="skill-info">
-                          <span className="skill-name">Diseño Editorial & Layout</span>
+                          <span className="skill-name">IA design / Automatizaciones</span>
                           <span className="skill-percent">0%</span>
                         </div>
                         <div className="skill-progress-bg">
@@ -473,7 +449,7 @@ function App() {
                           <span className="skill-percent">0%</span>
                         </div>
                         <div className="skill-progress-bg">
-                          <div className="skill-progress-fill" data-percent="80" />
+                          <div className="skill-progress-fill" data-percent="90" />
                         </div>
                       </div>
 
@@ -483,7 +459,7 @@ function App() {
                           <span className="skill-percent">0%</span>
                         </div>
                         <div className="skill-progress-bg">
-                          <div className="skill-progress-fill" data-percent="85" />
+                          <div className="skill-progress-fill" data-percent="87" />
                         </div>
                       </div>
                     </div>
@@ -496,14 +472,14 @@ function App() {
             {/* TextLoop Section Separator */}
             <div className="loop-separator">
               <TextLoop
-                text="BRANDING ✦ DIRECCIÓN DE ARTE ✦ ILUSTRACIÓN ✦ DISEÑO EDITORIAL ✦ PACKAGING ✦ ARTE DIGITAL ✦ ANIMACIÓN"
+                text="PRODUCT DESIGN ✦ UX/UI ✦ DISEÑO WEB ✦ BRANDING ✦ DISEÑO EDITORIAL ✦ PACKAGING ✦ MOTION GRAPHICS ✦ IA"
                 shape="line"
                 speed={45}
                 direction="forward"
                 separator="✦"
-                fontSize={20}
+                fontSize={isTabletOrMobile ? 15 : 20}
                 fontWeight={600}
-                letterSpacing={6}
+                letterSpacing={isTabletOrMobile ? 4 : 6}
                 uppercase
                 color="#FF6000" /* Orange color loop */
                 ribbon={false}
@@ -517,13 +493,13 @@ function App() {
                 <span className="section-subtitle">Contacto</span>
                 <h2 className="section-title">¿Tienes una <span className="text-highlight">Idea</span>?</h2>
                 <p className="section-desc">
-                  ¡Colaboremos! Si buscas una nueva identidad para tu marca, un proyecto editorial único o simplemente quieres charlar sobre diseño, escríbeme y crearemos algo genial juntos.
+                  ¡Colaboremos! Si buscas una nueva identidad para tu marca, un entorno web, la idea de una nueva app o cualquier tipo de idea relacionada con el diseño escribeme y podemos crear algo juntos.
                 </p>
 
                 <div className="contact-card glass-card">
                   <div className="contact-info">
                     <h3 className="contact-name">Daniel Aznar</h3>
-                    <p className="contact-title">Diseñador Gráfico & Director Creativo</p>
+                    <p className="contact-title">Diseñador Gráfico, UX/UI & Product Designer</p>
                     <div className="contact-details">
                       <div className="contact-detail-item">
                         <span className="contact-detail-icon">✉️</span>

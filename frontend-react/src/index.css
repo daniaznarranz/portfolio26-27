@@ -15,7 +15,7 @@
   /* Soft rich charcoal */
   --color-text-main: #1A1819;
   /* Aligned main text to dark charcoal */
-  --color-text-muted: #6B7280;
+  --color-text-muted: #4B5563;
   /* Cool gray for muted text */
   --border-color: rgba(26, 24, 25, 0.12);
   /* More defined outline */
@@ -121,7 +121,7 @@ textarea {
   /* Slightly rounder for graphic design feel */
   padding: 2rem;
   box-shadow: var(--shadow-premium);
-  transition: var(--transition-smooth);
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.25s ease, background-color 0.25s ease;
 }
 
 .glass-card:hover {
@@ -168,8 +168,13 @@ textarea {
 }
 
 .btn-secondary:hover {
-  background-color: var(--color-dark);
-  color: var(--color-white);
+  background-color: rgba(26, 24, 25, 0.05);
+  color: var(--color-dark);
   border-color: var(--color-dark);
   transform: translateY(-2px);
+}
+
+.btn:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
 }
