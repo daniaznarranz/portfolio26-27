@@ -4,5 +4,5 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/portfolio26-27/',
+  base: process.env.VERCEL ? '/' : '/portfolio26-27/',
 })
