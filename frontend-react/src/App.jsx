@@ -9,7 +9,9 @@ import AllProjects, { ALL_PROJECTS } from './AllProjects';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import brumaHero from './assets/bruma_hero.jpg';
 import ProjectDetail from './ProjectDetail';
-import developerPortrait from './assets/Foto sobre mi.jpeg';
+import ErrorBoundary from './ErrorBoundary';
+import NotFoundView from './NotFoundView';
+import developerPortrait from './assets/Foto sobre mi 2.jpeg';
 import tdcHorizontal1 from './assets/TDC_horizontal_1.jpg';
 import inputPortada from './assets/Input_Portada.jpg';
 import cesidaIdHorizontal1 from './assets/CesidaID_Horizontal1.jpg';
@@ -34,18 +36,18 @@ import './App.css';
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const DRIFT_ITEMS = [
-  { image: drift1, title: 'Cata la Lata', href: '#' },
-  { image: drift2, title: 'Bruma', href: '#' },
-  { image: drift3, title: 'Cesida', href: '#' },
-  { image: drift4, title: 'Cheesecake World', href: '#' },
-  { image: drift5, title: 'Reverfest', href: '#' },
-  { image: drift6, title: 'Teatros del Canal Web', href: '#' },
-  { image: drift7, title: 'Teatros del Canal Mupi', href: '#' },
-  { image: drift8, title: 'Bruma Web', href: '#' },
-  { image: drift9, title: 'Guía de Libros Móvil', href: '#' },
-  { image: drift10, title: 'Guía de Libros Layout', href: '#' },
-  { image: drift11, title: 'Goiko Emmy Kevin', href: '#' },
-  { image: drift12, title: 'Goiko Capo Pecorino', href: '#' }
+  { image: drift1, title: 'Cata la Lata' },
+  { image: drift2, title: 'Bruma' },
+  { image: drift3, title: 'Cesida' },
+  { image: drift4, title: 'Cheesecake World' },
+  { image: drift5, title: 'Reverfest' },
+  { image: drift6, title: 'Teatros del Canal Web' },
+  { image: drift7, title: 'Teatros del Canal Mupi' },
+  { image: drift8, title: 'Bruma Web' },
+  { image: drift9, title: 'Guía de Libros Móvil' },
+  { image: drift10, title: 'Guía de Libros Layout' },
+  { image: drift11, title: 'Goiko Emmy Kevin' },
+  { image: drift12, title: 'Goiko Capo Pecorino' }
 ];
 
 
@@ -57,10 +59,23 @@ function App() {
   const [currentView, setCurrentView] = useState('landing');
   const [selectedProject, setSelectedProject] = useState(null);
   const [isTabletOrMobile, setIsTabletOrMobile] = useState(false);
+  const [isLandscape, setIsLandscape] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const [viewportHeight, setViewportHeight] = useState(1080);
+  const prevViewRef = useRef(currentView);
+
+  useEffect(() => {
+    prevViewRef.current = currentView;
+  });
 
   useEffect(() => {
     const handleResize = () => {
-      setIsTabletOrMobile(window.innerWidth <= 968);
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      setIsTabletOrMobile(width <= 968);
+      setIsLandscape(width > height);
+      setViewportHeight(height);
+      setIsTouchDevice(window.matchMedia('(pointer: coarse)').matches);
     };
     handleResize();
     window.addEventListener('resize', handleResize);
@@ -110,15 +125,94 @@ function App() {
     }
   ];
 
-  const navigateTo = (view) => {
-    const tl = gsap.timeline();
-    tl.to('.app-root-content', { opacity: 0, duration: 0.35, ease: 'power2.inOut' })
-      .call(() => {
+  const [pendingScrollTarget, setPendingScrollTarget] = useState(null);
+
+  const navigateTo = (view, targetId = null) => {
+    if (view === currentView) {
+      if (targetId) {
+        const el = document.getElementById(targetId);
+        if (el) {
+          const headerOffset = 80;
+          const elementPosition = el.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.scrollY - headerOffset;
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }
+      return;
+    }
+
+    if (targetId) {
+      setPendingScrollTarget(targetId);
+    }
+
+    // Disable interaction during transition
+    document.body.style.pointerEvents = 'none';
+
+    // Snappy fade out of current view
+    gsap.to('.app-root-content', {
+      opacity: 0,
+      y: -15,
+      duration: 0.18,
+      ease: 'power2.in',
+      onComplete: () => {
         setCurrentView(view);
-        window.scrollTo(0, 0);
-      })
-      .to('.app-root-content', { opacity: 1, duration: 0.35, ease: 'power2.inOut' });
+        if (!targetId) {
+          window.scrollTo(0, 0);
+        }
+      }
+    });
   };
+
+  useGSAP(() => {
+    const prevView = prevViewRef.current;
+    if (prevView === currentView) {
+      return;
+    }
+
+    // Snappy fade-in and slide-up of new view content
+    gsap.fromTo('.app-root-content',
+      { y: 15, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.28,
+        ease: 'cubic-bezier(0.16, 1, 0.3, 1)',
+        clearProps: 'transform',
+        onComplete: () => {
+          document.body.style.pointerEvents = 'auto';
+        }
+      }
+    );
+  }, [currentView]);
+
+  useEffect(() => {
+    if (currentView === 'landing' && pendingScrollTarget) {
+      const targetElement = document.getElementById(pendingScrollTarget);
+      if (targetElement) {
+        const headerOffset = 80;
+        const elementPosition = targetElement.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.scrollY - headerOffset;
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'auto'
+        });
+      }
+      setPendingScrollTarget(null);
+    }
+  }, [currentView, pendingScrollTarget]);
+
+  useEffect(() => {
+    let title = 'Daniel Aznar Ranz ✦ Diseño Gráfico, UX/UI & Product Design';
+    if (currentView === 'projects') {
+      title = 'Todos los Proyectos ✦ Daniel Aznar Ranz';
+    } else if (currentView === 'project-detail' && selectedProject) {
+      title = `${selectedProject.title} ✦ Proyectos ✦ Daniel Aznar Ranz`;
+    }
+    document.title = title;
+  }, [currentView, selectedProject]);
 
   const [hasAnimatedLanding, setHasAnimatedLanding] = useState(false);
 
@@ -162,27 +256,27 @@ function App() {
       }
     });
 
-    // 1. Preloader entrance animation (Alternating bouncy slide-in)
+    // 1. Preloader entrance animation (Clean uniform slide up)
     tl.fromTo('.preloader-char',
       {
-        yPercent: (index) => (index % 2 === 0 ? -120 : 120),
+        yPercent: 100,
         opacity: 0
       },
       {
         yPercent: 0,
         opacity: 1,
-        duration: 1.0,
-        stagger: 0.05,
-        ease: 'back.out(1.5)'
+        duration: 0.5,
+        stagger: 0.02,
+        ease: 'power4.out'
       },
-      '+=0.3'
+      '+=0.15'
     )
-      // 3. Preloader exit (Whole overlay curtain slides up)
+      // 2. Preloader exit (Fast exit slide up)
       .to('.preloader-overlay', {
         yPercent: -100,
-        duration: 1.0,
+        duration: 0.65,
         ease: 'power4.inOut'
-      }, '+=0.6')
+      }, '+=0.25')
 
       // 4. Navbar slide down and elements fade-in
       .fromTo('.navbar-header',
@@ -223,7 +317,7 @@ function App() {
         { opacity: 1, scale: 1, duration: 1.0, ease: 'power2.out' },
         '-=0.3'
       );
-  }, { scope: mainRef, dependencies: [currentView, hasAnimatedLanding] });
+  }, { dependencies: [currentView, hasAnimatedLanding] });
 
   // Animation for Skills Section on Landing View
   useGSAP(() => {
@@ -269,7 +363,7 @@ function App() {
         }
       });
     });
-  }, { scope: mainRef, dependencies: [currentView] });
+  }, { dependencies: [currentView] });
 
   return (
     <div ref={mainRef}>
@@ -294,7 +388,8 @@ function App() {
 
       <div className="app-root-content">
         {currentView === 'landing' ? (
-          <>
+          <ErrorBoundary onReset={() => navigateTo('landing')}>
+            <>
             {/* Split-Screen Main Layout */}
             <div className="app-container" id="inicio">
               {/* Left Content Panel */}
@@ -308,10 +403,42 @@ function App() {
                     Diseñador integral con especial interés en product design, desarrollo web y UX/UI, además de branding, diseño editorial y animación. Creo experiencias interactivas y universos visuales que conectan de forma memorable.
                   </p>
                   <div className="hero-actions">
-                    <a href="#proyectos" onClick={(e) => { e.preventDefault(); navigateTo('projects'); }} className="btn btn-primary">
+                    <a 
+                      href="#proyectos" 
+                      onClick={(e) => {
+                        e.preventDefault();
+                        const el = document.getElementById('proyectos');
+                        if (el) {
+                          const headerOffset = 80;
+                          const elementPosition = el.getBoundingClientRect().top;
+                          const offsetPosition = elementPosition + window.scrollY - headerOffset;
+                          window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                          });
+                        }
+                      }} 
+                      className="btn btn-primary"
+                    >
                       Ver Proyectos
                     </a>
-                    <a href="#sobre-mi" className="btn btn-secondary">
+                    <a 
+                      href="#sobre-mi" 
+                      onClick={(e) => {
+                        e.preventDefault();
+                        const el = document.getElementById('sobre-mi');
+                        if (el) {
+                          const headerOffset = 80;
+                          const elementPosition = el.getBoundingClientRect().top;
+                          const offsetPosition = elementPosition + window.scrollY - headerOffset;
+                          window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                          });
+                        }
+                      }} 
+                      className="btn btn-secondary"
+                    >
                       Sobre Mí
                     </a>
                   </div>
@@ -358,12 +485,12 @@ function App() {
                     items={workItems}
                     defaultIndex={2}
                     expandRatio={0.58}
-                    trigger={isTabletOrMobile ? "click" : "hover"}
+                    trigger={(isTabletOrMobile || isTouchDevice) ? "click" : "hover"}
                     grayscale={false}
-                    height={isTabletOrMobile ? 400 : 620}
+                    height={(isTabletOrMobile && !isLandscape) ? 400 : (viewportHeight < 500 ? 280 : (viewportHeight < 800 ? 420 : 620))}
                     gap={12}
                     radius={20}
-                    orientation={isTabletOrMobile ? "vertical" : "horizontal"}
+                    orientation={(isTabletOrMobile && !isLandscape) ? "vertical" : "horizontal"}
                   />
                   <div className="works-view-all">
                     <button onClick={() => navigateTo('projects')} className="btn btn-secondary">
@@ -516,7 +643,7 @@ function App() {
                     <a href="mailto:daniaznarranz@gmail.com" className="btn btn-primary">
                       Enviar Email
                     </a>
-                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
+                    <a href="https://www.linkedin.com/in/daniel-aznar-ranz/" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
                       Ver LinkedIn
                     </a>
                   </div>
@@ -524,10 +651,21 @@ function App() {
               </div>
             </section>
           </>
+          </ErrorBoundary>
         ) : currentView === 'project-detail' ? (
-          <ProjectDetail project={selectedProject} navigateTo={navigateTo} />
+          selectedProject ? (
+            <ErrorBoundary onReset={() => navigateTo('landing')}>
+              <ProjectDetail project={selectedProject} navigateTo={navigateTo} />
+            </ErrorBoundary>
+          ) : (
+            <NotFoundView navigateTo={navigateTo} />
+          )
+        ) : currentView === 'projects' ? (
+          <ErrorBoundary onReset={() => navigateTo('landing')}>
+            <AllProjects navigateTo={navigateTo} onSelectProject={handleSelectProject} />
+          </ErrorBoundary>
         ) : (
-          <AllProjects navigateTo={navigateTo} onSelectProject={handleSelectProject} />
+          <NotFoundView navigateTo={navigateTo} />
         )}
       </div>
     </div>

@@ -46,8 +46,12 @@ export default function ProjectCard({ project, onSelect }) {
         <span className="project-card-category">{project.category}</span>
       </div>
       <div className="project-card-content">
-        <h3 className="project-card-title">{project.title}</h3>
-        <p className="project-card-desc">{project.description}</p>
+        <h3 className="project-card-title">
+          <span className="project-card-main-title">{project.title.split(' ✦ ')[0]}</span>
+          {project.title.includes(' ✦ ') && (
+            <span className="project-card-subtitle">{project.title.split(' ✦ ')[1]}</span>
+          )}
+        </h3>
         <div className="project-card-tags">
           {project.technologies.map((tech, idx) => (
             <span key={idx} className="project-card-tag">{tech}</span>

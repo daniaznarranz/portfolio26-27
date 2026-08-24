@@ -72,7 +72,9 @@ const AccordionGallery = ({
         const text = textRefs.current[i];
 
         const rot = isActive ? 0 : i < active ? tilt : -tilt;
-        const rotProp = vertical ? { rotateX: -rot } : { rotateY: rot };
+        const rotProp = vertical 
+          ? { rotateX: -rot, rotateY: 0 } 
+          : { rotateY: rot, rotateX: 0 };
 
         tl.to(panel, { flexGrow: isActive ? grow : 1, ...rotProp, duration: dur, ease }, 0);
 

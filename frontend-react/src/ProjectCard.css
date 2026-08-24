@@ -101,19 +101,31 @@
   font-weight: 700;
   color: var(--color-dark);
   letter-spacing: -0.3px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.project-card-main-title {
+  display: block;
   transition: color 0.3s ease;
 }
 
-.project-card:hover .project-card-title {
-  color: var(--color-primary); /* Swaps to orange on card hover! */
+.project-card-subtitle {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  letter-spacing: 0;
+  line-height: 1.4;
 }
 
-.project-card-desc {
-  font-size: 0.9rem;
-  color: var(--color-text-muted);
-  line-height: 1.5;
-  margin: 0;
+.project-card:hover .project-card-main-title {
+  color: var(--color-primary); /* Swaps main title to orange on card hover */
 }
+
+
 
 /* Technologies tags */
 .project-card-tags {

@@ -273,11 +273,11 @@ export const ALL_PROJECTS = [
   {
     image: libroEspeculativoHorizontal1,
     video: libroEspeculativoVideoPrincipal,
-    title: 'Guía Práctica ✦ Libro Especulativo',
+    title: 'Guía Práctica para recuperar los libros ✦ Proyecto Especulativo',
     category: 'Editorial & Impresos',
     categoryKey: 'editorial',
     description: 'Diseño editorial y desarrollo interactivo para un libro especulativo centrado en la recuperación de la memoria impresa y el valor del papel.',
-    technologies: ['Editorial & Impresos', 'Layout', 'Desarrollo Web', 'Diseño Especulativo'],
+    technologies: ['Editorial & Impresos', 'Desarrollo Web', 'Diseño Especulativo', 'Automatización', 'Chatbot'],
     link: 'https://guia-practica-de-un-libro.vercel.app/',
     client: 'Proyecto Personal / Autoedición',
     year: '2025',

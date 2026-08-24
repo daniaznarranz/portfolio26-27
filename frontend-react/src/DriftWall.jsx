@@ -238,7 +238,7 @@ const DriftWall = ({
       onFocus: () => activate(id, colIndex),
       onBlur: release
     };
-    if (item.href) {
+    if (item.href && item.href !== '#') {
       return (
         <a key={id} href={item.href} target="_blank" rel="noreferrer noopener" {...commonProps}>
           {inner}

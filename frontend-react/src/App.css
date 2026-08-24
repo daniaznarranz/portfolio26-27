@@ -833,3 +833,94 @@
     gap: 0.75rem;
   }
 }
+
+
+
+/* Error Fallback Styles */
+.error-fallback-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 160px);
+  padding: 6rem 2rem;
+  box-sizing: border-box;
+}
+
+.error-fallback-card {
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+  padding: 3.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.error-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.error-desc {
+  font-size: 1.05rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin: 0 0 1rem 0;
+}
+
+.error-actions-row {
+  display: flex;
+  gap: 1.25rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+@media (max-width: 480px) {
+  .error-fallback-card {
+    padding: 2.5rem 1.5rem;
+  }
+  
+  .error-actions-row {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .error-actions-row .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Emil Kowalski - Premium Interactions & Accessibility */
+
+/* Smooth transitions for navigation links */
+.nav-link {
+  transition: color 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Physical tactile active click feedback for buttons */
+.btn {
+  transition: transform 0.1s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn:active {
+  transform: scale(0.96) !important;
+}
+
+/* System accessibility overrides for reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-delay: 0s !important;
+    animation-duration: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0s !important;
+    scroll-behavior: auto !important;
+  }
+  .preloader-overlay {
+    display: none !important;
+  }
+}

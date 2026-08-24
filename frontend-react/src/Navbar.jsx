@@ -84,31 +84,14 @@ export default function Navbar({ currentView = 'landing', navigateTo }) {
     }
     
     if (currentView !== 'landing') {
-      navigateTo('landing');
-      setTimeout(() => {
-        if (targetId === 'inicio') {
-          window.scrollTo({ top: 0, behavior: 'auto' });
-          setActiveSection('inicio');
-          return;
-        }
-        const targetElement = document.getElementById(targetId);
-        if (targetElement) {
-          const headerOffset = 80;
-          const elementPosition = targetElement.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.scrollY - headerOffset;
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'auto'
-          });
-          setActiveSection(targetId);
-        }
-      }, 400);
+      navigateTo('landing', targetId);
+      setActiveSection(targetId);
       return;
     }
 
     // Default landing page behavior
     if (targetId === 'inicio') {
-      window.scrollTo({ top: 0, behavior: 'auto' });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       setActiveSection('inicio');
       return;
     }
@@ -122,7 +105,7 @@ export default function Navbar({ currentView = 'landing', navigateTo }) {
 
       window.scrollTo({
         top: offsetPosition,
-        behavior: 'auto'
+        behavior: 'smooth'
       });
       setActiveSection(targetId);
     }

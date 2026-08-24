@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://daniaznarranz.github.io/portfolio26-27/sitemap.xml
