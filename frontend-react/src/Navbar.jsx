@@ -14,6 +14,11 @@ export default function Navbar({ currentView = 'landing', navigateTo }) {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
+    if (currentView === 'cv') {
+      setActiveSection('cv');
+      return;
+    }
+
     if (currentView !== 'landing') {
       setActiveSection('proyectos');
       return;
@@ -140,11 +145,15 @@ export default function Navbar({ currentView = 'landing', navigateTo }) {
           </ul>
         </nav>
 
-        {/* Desktop CTA */}
+        {/* Desktop CTA - CV */}
         <div className="navbar-cta">
-          <a href="#contacto" onClick={(e) => handleLinkClick(e, '#contacto')} className="btn-cta">
-            Hablemos
-          </a>
+          <button 
+            onClick={() => navigateTo('cv')} 
+            className={`btn-cta ${currentView === 'cv' ? 'active' : ''}`}
+            aria-label="Ver Currículum Vitae"
+          >
+            Mi CV
+          </button>
         </div>
 
         {/* Responsive Mobile Hamburger Toggle */}
@@ -184,16 +193,16 @@ export default function Navbar({ currentView = 'landing', navigateTo }) {
           </ul>
         </nav>
         <div className="navbar-mobile-cta">
-          <a 
-            href="#contacto" 
-            onClick={(e) => {
-              handleLinkClick(e, '#contacto');
+          <button 
+            onClick={() => {
+              navigateTo('cv');
               setIsOpen(false);
             }} 
             className="btn btn-primary"
+            style={{ width: '100%', justifyContent: 'center' }}
           >
-            Hablemos
-          </a>
+            Mi CV
+          </button>
         </div>
       </div>
     </>

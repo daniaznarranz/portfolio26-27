@@ -9,6 +9,7 @@ import AllProjects, { ALL_PROJECTS } from './AllProjects';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import brumaHero from './assets/bruma_hero.jpg';
 import ProjectDetail from './ProjectDetail';
+import CvView from './CvView';
 import ErrorBoundary from './ErrorBoundary';
 import NotFoundView from './NotFoundView';
 import developerPortrait from './assets/Foto sobre mi 2.jpeg';
@@ -206,7 +207,9 @@ function App() {
 
   useEffect(() => {
     let title = 'Daniel Aznar Ranz ✦ Diseño Gráfico, UX/UI & Product Design';
-    if (currentView === 'projects') {
+    if (currentView === 'cv') {
+      title = 'Currículum Vitae ✦ Daniel Aznar Ranz';
+    } else if (currentView === 'projects') {
       title = 'Todos los Proyectos ✦ Daniel Aznar Ranz';
     } else if (currentView === 'project-detail' && selectedProject) {
       title = `${selectedProject.title} ✦ Proyectos ✦ Daniel Aznar Ranz`;
@@ -397,10 +400,10 @@ function App() {
                 <main className="hero-content">
                   <span className="hero-subtitle">Diseño Gráfico, UX/UI & Product Design</span>
                   <h1 className="hero-title">
-                    Dando vida a ideas a través del <span className="text-highlight">diseño visual</span>
+                    Dando vida a ideas a través del <span className="text-highlight">diseño</span>
                   </h1>
                   <p className="hero-desc">
-                    Diseñador integral con especial interés en product design, desarrollo web y UX/UI, además de branding, diseño editorial y animación. Creo experiencias interactivas y universos visuales que conectan de forma memorable.
+                    Diseñador enfocado en el entorno digital, UX/UI y product design. Disfruto de entender cada reto para dar con la mejor solución, cuidar los detalles y construir proyectos tan sólidos como visuales.
                   </p>
                   <div className="hero-actions">
                     <a 
@@ -477,7 +480,7 @@ function App() {
                 <span className="section-subtitle">Portfolio</span>
                 <h2 className="section-title">Últimos <span className="text-highlight">Trabajos</span></h2>
                 <p className="section-desc">
-                  Una selección de identidades visuales, proyectos editoriales y campañas creativas que demuestran mi amor por las formas, los colores y las historias visuales.
+                  Una selección de trabajos de diferentes disciplinas donde el criterio visual, la estrategia y la usabilidad se encuentran para transformar conceptos en soluciones que realmente funcionan.
                 </p>
 
                 <div className="works-gallery-container">
@@ -651,6 +654,10 @@ function App() {
               </div>
             </section>
           </>
+          </ErrorBoundary>
+        ) : currentView === 'cv' ? (
+          <ErrorBoundary onReset={() => navigateTo('landing')}>
+            <CvView navigateTo={navigateTo} />
           </ErrorBoundary>
         ) : currentView === 'project-detail' ? (
           selectedProject ? (

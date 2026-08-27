@@ -48,32 +48,30 @@ export default function ProjectDetail({ project, navigateTo }) {
             {project.title.split(' ✦ ')[1] || project.category}
           </span>
         </header>
-      </div>
 
-      {/* Full-width Hero Cover Image/Video (Breakout style) */}
-      <div className="project-hero-media-wrapper" onClick={() => setActiveImage(project.video || project.image)}>
-        {isVideo ? (
-          <video
-            src={project.video || project.image}
-            className="project-hero-media"
-            autoPlay
-            loop
-            muted
-            playsInline
-            controls
-            onClick={(e) => e.stopPropagation()}
-          />
-        ) : (
-          <img 
-            src={project.image} 
-            alt={project.title} 
-            className="project-hero-media" 
-            style={project.containImages ? { objectFit: 'contain', backgroundColor: '#ffffff', padding: '20px' } : {}} 
-          />
-        )}
-      </div>
+        {/* Hero Cover Image/Video */}
+        <div className="project-hero-media-wrapper" onClick={() => setActiveImage(project.video || project.image)}>
+          {isVideo ? (
+            <video
+              src={project.video || project.image}
+              className="project-hero-media"
+              autoPlay
+              loop
+              muted
+              playsInline
+              controls
+              onClick={(e) => e.stopPropagation()}
+            />
+          ) : (
+            <img 
+              src={project.image} 
+              alt={project.title} 
+              className="project-hero-media" 
+              style={project.containImages ? { objectFit: 'contain', backgroundColor: '#ffffff', padding: '20px' } : {}} 
+            />
+          )}
+        </div>
 
-      <div className="project-detail-container">
         {/* Project Case Study / Info Grid */}
         <section className="project-case-study">
           {/* Left Column: Metadata Card Panel */}

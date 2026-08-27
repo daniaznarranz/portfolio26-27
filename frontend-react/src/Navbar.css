@@ -117,7 +117,8 @@
   cursor: pointer;
 }
 
-.btn-cta:hover {
+.btn-cta:hover,
+.btn-cta.active {
   background: var(--color-primary);
   color: var(--color-white);
   border-color: var(--color-primary);
