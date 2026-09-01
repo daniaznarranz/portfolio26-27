@@ -26,6 +26,10 @@
   min-height: 0;
   overflow: hidden;
   border-radius: var(--ag-radius);
+  border: none;
+  padding: 0;
+  font: inherit;
+  text-align: left;
   cursor: pointer;
   display: block;
   text-decoration: none;

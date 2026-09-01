@@ -1,34 +1,35 @@
-# Daniel Aznar Ranz - Portfolio Profesional
+# Daniel Aznar Ranz
 
-> Diseñador Gráfico, UX/UI & Product Designer afincado en Madrid, España.
+> Portfolio profesional de Daniel Aznar Ranz, diseñador gráfico, UX/UI & Product Designer en Madrid, España.
 
-## Resumen del Perfil
-Daniel Aznar Ranz es un diseñador gráfico y diseñador de producto digital (UX/UI & Product Designer) en Madrid. Combina visión estratégica, rigor visual y comprensión del desarrollo web interactivo para transformar conceptos complejos en experiencias visuales memorables y funcionales.
+Diseñador gráfico especializado en entornos digitales, diseño de producto digital (UX/UI & Product Design), identidad de marca (Branding), packaging, diseño editorial y motion graphics en Madrid.
 
-## Ubicación y Disponibilidad
-- **Ubicación:** Madrid, España
-- **Modalidad:** Presencial en Madrid, Híbrido y Remoto
-- **Servicios:** Diseño Web, Prototipado UX/UI en Figma, Identidad de Marca (Branding), Packaging, Diseño Editorial, Animación Motion Graphics.
+## Proyectos
 
-## Datos de Contacto Oficiales
-- **Email:** daniaznarranz@gmail.com
-- **Teléfono / WhatsApp:** +34 692 44 93 22 (https://wa.me/34692449322)
-- **LinkedIn:** https://www.linkedin.com/in/daniel-aznar-ranz/
-- **Instagram:** https://www.instagram.com/ranz_dsn/
-- **Sitio Web Oficial:** https://daniel-aznar-portfolio.es/
+- [Guía Práctica para recuperar los libros](https://guia-practica-de-un-libro.vercel.app/): Proyecto editorial y desarrollo web interactivo sobre la memoria impresa y el soporte papel.
+- [Bruma](https://leo-velasco-garcia.github.io/alfombra/#): Proyecto experimental de tejido, memoria y fanzine para el Museo de Artes Decorativas de Madrid.
+- [Cesida](https://daniel-aznar-portfolio.es/): Pieza audiovisual de Motion Graphics y rediseño de identidad para la Coordinadora Estatal de VIH y Sida.
+- [Teatros del Canal](https://daniel-aznar-portfolio.es/): Rediseño integral de la identidad visual de los Teatros del Canal de la Comunidad de Madrid.
+- [Input](https://daniel-aznar-portfolio.es/): Revista semestral autogestionada para la comunidad estudiantil de la Escuela Superior de Diseño de Madrid (ESD).
+- [Salsas Goiko](https://daniel-aznar-portfolio.es/): Sistema de packaging dinámico para la gama de salsas para llevar de Goiko Grill.
+- [Café BM](https://daniel-aznar-portfolio.es/): Rediseño de línea de packaging de café para BM Supermercados.
+- [Cheesecake World](https://daniel-aznar-portfolio.es/): Libro visual e ilustración gastronómica dedicado a las tartas de queso.
 
-## Proyectos Destacados en el Portfolio
-1. **Guía Práctica para recuperar los libros (2025):** Proyecto editorial y desarrollo web interactivo sobre la memoria impresa y el soporte papel. Enlace: https://guia-practica-de-un-libro.vercel.app/
-2. **Bruma (2025):** Proyecto experimental de tejido, memoria y fanzine para el Museo de Artes Decorativas de Madrid. Enlace: https://leo-velasco-garcia.github.io/alfombra/#
-3. **Cesida - Motion Graphics & Rediseño de Identidad (2025):** Pieza audiovisual y rediseño completo de marca para la Coordinadora Estatal de VIH y Sida (CESIDA).
-4. **Teatros del Canal (2024):** Rediseño integral de la identidad visual y sistema de salas para los Teatros del Canal (Comunidad de Madrid).
-5. **Input - Revista de la ESD (2024):** Co-dirección creativa, diseño y maquetación para la revista de la Escuela Superior de Diseño de Madrid.
-6. **Salsas Goiko (2025):** Sistema de packaging dinámico para la gama de salsas para llevar de Goiko Grill.
-7. **Café BM (2025):** Rediseño integral de la gama de café de marca blanca de BM Supermercados.
-8. **Cheesecake World (2025):** Libro ilustrado y diseño editorial dedicado al universo gastronómico de las tartas de queso.
+## Contacto
 
-## Habilidades y Stack Tecnológico
-- **Diseño & UX/UI:** Figma (Design Systems, Auto-layout, Prototipado interactivo, Variables), UX Research & Testing, Wireframing, Identidad de Marca, Packaging, Diseño Editorial, Motion Graphics.
-- **Desarrollo Frontend:** HTML5 Semántico, CSS3 Moderno, JavaScript ES6+, React, Vite, GSAP (GreenSock Animation Platform), Responsive Web Design.
-- **Herramientas Creativas:** Adobe Illustrator, Adobe Photoshop, Adobe InDesign, Adobe After Effects.
-- **Metodologías:** Design Thinking, Metodologías Ágiles, Automatizaciones e Integración de IA adaptativa.
+- [Portfolio Web](https://daniel-aznar-portfolio.es/): Sitio web oficial y catálogo interactivo de proyectos.
+- [WhatsApp](https://wa.me/34692449322): Contacto directo vía WhatsApp (+34 692 44 93 22).
+- [Email](mailto:daniaznarranz@gmail.com): Envío de correo a daniaznarranz@gmail.com.
+- [LinkedIn](https://www.linkedin.com/in/daniel-aznar-ranz/): Perfil profesional de Daniel Aznar Ranz.
+- [Instagram](https://www.instagram.com/ranz_dsn/): Cuenta oficial de diseño @ranz_dsn.
+
+## Especialidades
+
+- [Diseño UX/UI y Producto](https://daniel-aznar-portfolio.es/): Prototipado de alta fidelidad en Figma, Design Systems, UX Research, Design Thinking y arquitectura de información.
+- [Branding e Identidad Visual](https://daniel-aznar-portfolio.es/): Estrategia de marca, logotipos, guías de estilo y sistemas visuales contemporáneos.
+- [Diseño Editorial y Packaging](https://daniel-aznar-portfolio.es/): Dirección de arte para publicaciones impresas, fanzines, libros y empaques físicos.
+- [Motion Graphics](https://daniel-aznar-portfolio.es/): Animación gráfica 2D, piezas audiovisuales institucionales y mupis dinámicos.
+
+## Optional
+
+- [Curriculum Vitae y Detalles](/llms-full.txt): Información extendida sobre experiencia laboral, educación y herramientas técnicas.

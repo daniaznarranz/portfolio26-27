@@ -193,19 +193,18 @@ const AccordionGallery = ({
         '--ag-radius': `${radius}px`,
         height: vertical ? `${Math.round(height * 1.6)}px` : `${height}px`
       }}
-      role="list"
-      aria-label="Image accordion gallery"
+      role="region"
+      aria-label="Galería de proyectos destacados"
     >
       {items.map((item, i) => {
         const isActive = i === active;
-        const Tag = (item.link || item.onClick) ? 'a' : 'div';
         return (
-          <Tag
+          <button
+            type="button"
             key={i}
             ref={el => (panelRefs.current[i] = el)}
             className={`ag-panel${isActive ? ' ag-panel--active' : ''}`}
             style={{ borderRadius: `${radius}px` }}
-            href={item.link || (item.onClick ? '#' : undefined)}
             onMouseDown={() => { pointerDownRef.current = true; }}
             onTouchStart={() => { pointerDownRef.current = true; }}
             onClick={e => handleClick(i, e)}
@@ -217,10 +216,8 @@ const AccordionGallery = ({
               pointerDownRef.current = false;
             }}
             onKeyDown={e => handleKeyDown(i, e)}
-            role="listitem"
-            tabIndex={0}
-            aria-current={isActive ? 'true' : undefined}
             aria-label={item.label}
+            aria-expanded={isActive}
           >
             <span className="ag-panel__frame">
               <span className="ag-panel__media" ref={el => (mediaRefs.current[i] = el)}>
@@ -243,7 +240,7 @@ const AccordionGallery = ({
                 </span>
               </span>
             )}
-          </Tag>
+          </button>
         );
       })}
     </div>

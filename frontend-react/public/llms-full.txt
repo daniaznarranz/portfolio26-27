@@ -1,0 +1,66 @@
+# Daniel Aznar Ranz - Información Completa del Portfolio & CV
+
+> Documento extendido para agentes de Inteligencia Artificial, LLMs y sistemas de indexación semántica.
+
+## Biografía
+Daniel Aznar Ranz es un diseñador gráfico, diseñador de interfaces y producto digital (UX/UI & Product Designer) afincado en Madrid, España. Su enfoque combina metodología estratégica de diseño, rigor estético y conocimientos de desarrollo web interactivo para conceptualizar y construir proyectos visuales memorables.
+
+## Ubicación y Disponibilidad
+- **Ubicación Principal:** Madrid, Comunidad de Madrid, España.
+- **Modalidad de Trabajo:** Presencial en Madrid, Híbrido y Remoto.
+- **Idiomas:** Español (Nativo), Inglés (Intermedio profesional B1/B2).
+
+## Datos de Contacto
+- **Correo Electrónico:** daniaznarranz@gmail.com
+- **Teléfono / WhatsApp:** +34 692 44 93 22 (https://wa.me/34692449322)
+- **LinkedIn:** https://www.linkedin.com/in/daniel-aznar-ranz/
+- **Instagram:** https://www.instagram.com/ranz_dsn/
+- **Sitio Web Oficial:** https://daniel-aznar-portfolio.es/
+
+## Experiencia y Proyectos
+1. **Guía Práctica para recuperar los libros (2025):**
+   - *Categoría:* Editorial & Desarrollo Web Interactivo.
+   - *Rol:* Diseñador Editorial & Desarrollador Web.
+   - *Enlace:* https://guia-practica-de-un-libro.vercel.app/
+   - *Descripción:* Libro objeto y experiencia digital interactiva sobre la preservación del papel y la memoria impresa en la era digital.
+
+2. **Bruma (2025):**
+   - *Categoría:* Identidad Visual, Gráfica Impresa & Fanzine Experimental.
+   - *Cliente:* Museo de Artes Decorativas de Madrid.
+   - *Enlace:* https://leo-velasco-garcia.github.io/alfombra/#
+   - *Descripción:* Proyecto experimental en torno al tejido, la emoción y la memoria con publicación impresa y fanzine.
+
+3. **Cesida - Motion Graphics & Rediseño de Identidad (2025):**
+   - *Categoría:* Motion Graphics & Branding Institucional.
+   - *Cliente:* CESIDA (Coordinadora Estatal de VIH y Sida).
+   - *Descripción:* Pieza audiovisual animada en After Effects y rediseño del sistema de identidad corporativa.
+
+4. **Teatros del Canal (2024):**
+   - *Categoría:* Identidad Visual & Diseño de Espacio Cultural.
+   - *Cliente:* Teatros del Canal / Comunidad de Madrid.
+   - *Descripción:* Sistema dinámico de submarcas y señalética para los grandes escenarios escénicos de Madrid.
+
+5. **Input - Revista ESD (2024):**
+   - *Categoría:* Diseño Editorial & Dirección de Arte.
+   - *Cliente:* Escuela Superior de Diseño de Madrid (ESDM).
+   - *Descripción:* Revista semestral autogestionada para la comunidad estudiantil creativa.
+
+6. **Salsas Goiko (2025):**
+   - *Categoría:* Packaging & Ilustración.
+   - *Cliente:* Goiko Grill.
+   - *Descripción:* Línea de packaging takeaway con código cromático vibrante y lenguaje tipográfico desenfadado.
+
+7. **Café BM (2025):**
+   - *Categoría:* Packaging & Branding de Gran Consumo.
+   - *Cliente:* BM Supermercados.
+   - *Descripción:* Rediseño de la gama de café de marca blanca aportando carácter premium y diferenciación en el lineal.
+
+8. **Cheesecake World (2025):**
+   - *Categoría:* Diseño Editorial & Ilustración Gastronómica.
+   - *Descripción:* Libro visual monográfico dedicado al arte de la tarta de queso.
+
+## Habilidades Técnicas y Herramientas
+- **Diseño UI/UX:** Figma (Componentes, Auto-Layout, Variables, Prototipos Interactivos, Design Systems), Wireframing, UX Research, Testing de Usabilidad.
+- **Suite Adobe:** Adobe Illustrator, Adobe Photoshop, Adobe InDesign, Adobe After Effects.
+- **Desarrollo Frontend:** HTML5 Semántico, CSS3 Moderno, JavaScript (ES6+), React, Vite, GSAP (GreenSock), Responsive Design.
+- **Metodologías:** Design Thinking, Agile, Scrum, Automatizaciones e Integración de IA.
