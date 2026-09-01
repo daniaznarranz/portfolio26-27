@@ -227,6 +227,8 @@ const AccordionGallery = ({
                 <img 
                   src={item.image} 
                   alt={item.alt || item.label || ''} 
+                  loading="lazy"
+                  decoding="async"
                   draggable="false" 
                   style={item.contain ? { objectFit: 'contain', backgroundColor: '#ffffff', padding: '10px' } : {}}
                 />

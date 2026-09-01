@@ -1,0 +1,34 @@
+# Daniel Aznar Ranz - Portfolio Profesional
+
+> Diseñador Gráfico, UX/UI & Product Designer afincado en Madrid, España.
+
+## Resumen del Perfil
+Daniel Aznar Ranz es un diseñador gráfico y diseñador de producto digital (UX/UI & Product Designer) en Madrid. Combina visión estratégica, rigor visual y comprensión del desarrollo web interactivo para transformar conceptos complejos en experiencias visuales memorables y funcionales.
+
+## Ubicación y Disponibilidad
+- **Ubicación:** Madrid, España
+- **Modalidad:** Presencial en Madrid, Híbrido y Remoto
+- **Servicios:** Diseño Web, Prototipado UX/UI en Figma, Identidad de Marca (Branding), Packaging, Diseño Editorial, Animación Motion Graphics.
+
+## Datos de Contacto Oficiales
+- **Email:** daniaznarranz@gmail.com
+- **Teléfono / WhatsApp:** +34 692 44 93 22 (https://wa.me/34692449322)
+- **LinkedIn:** https://www.linkedin.com/in/daniel-aznar-ranz/
+- **Instagram:** https://www.instagram.com/ranz_dsn/
+- **Sitio Web Oficial:** https://daniel-aznar-portfolio.es/
+
+## Proyectos Destacados en el Portfolio
+1. **Guía Práctica para recuperar los libros (2025):** Proyecto editorial y desarrollo web interactivo sobre la memoria impresa y el soporte papel. Enlace: https://guia-practica-de-un-libro.vercel.app/
+2. **Bruma (2025):** Proyecto experimental de tejido, memoria y fanzine para el Museo de Artes Decorativas de Madrid. Enlace: https://leo-velasco-garcia.github.io/alfombra/#
+3. **Cesida - Motion Graphics & Rediseño de Identidad (2025):** Pieza audiovisual y rediseño completo de marca para la Coordinadora Estatal de VIH y Sida (CESIDA).
+4. **Teatros del Canal (2024):** Rediseño integral de la identidad visual y sistema de salas para los Teatros del Canal (Comunidad de Madrid).
+5. **Input - Revista de la ESD (2024):** Co-dirección creativa, diseño y maquetación para la revista de la Escuela Superior de Diseño de Madrid.
+6. **Salsas Goiko (2025):** Sistema de packaging dinámico para la gama de salsas para llevar de Goiko Grill.
+7. **Café BM (2025):** Rediseño integral de la gama de café de marca blanca de BM Supermercados.
+8. **Cheesecake World (2025):** Libro ilustrado y diseño editorial dedicado al universo gastronómico de las tartas de queso.
+
+## Habilidades y Stack Tecnológico
+- **Diseño & UX/UI:** Figma (Design Systems, Auto-layout, Prototipado interactivo, Variables), UX Research & Testing, Wireframing, Identidad de Marca, Packaging, Diseño Editorial, Motion Graphics.
+- **Desarrollo Frontend:** HTML5 Semántico, CSS3 Moderno, JavaScript ES6+, React, Vite, GSAP (GreenSock Animation Platform), Responsive Web Design.
+- **Herramientas Creativas:** Adobe Illustrator, Adobe Photoshop, Adobe InDesign, Adobe After Effects.
+- **Metodologías:** Design Thinking, Metodologías Ágiles, Automatizaciones e Integración de IA adaptativa.

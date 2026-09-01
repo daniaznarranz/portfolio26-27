@@ -41,6 +41,8 @@ export default function ProjectCard({ project, onSelect }) {
         <img 
           src={project.image} 
           alt={project.title} 
+          loading="lazy"
+          decoding="async"
           className="project-card-image" 
           style={project.containImages ? { objectFit: 'contain', backgroundColor: '#ffffff', padding: '15px' } : {}}
         />
