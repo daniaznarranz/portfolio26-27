@@ -80,7 +80,7 @@
 /* Hover state for inactive items */
 .navbar-capsule-item:not(.active):hover {
   color: var(--color-dark);
-  background: rgba(26, 24, 25, 0.04);
+  background: rgba(26, 24, 25, 0.12);
 }
 
 .navbar-capsule-item:not(.active):hover .navbar-capsule-icon {

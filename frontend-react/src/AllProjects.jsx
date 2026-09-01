@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ArrowLeft } from 'lucide-react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import ProjectCard from './ProjectCard';
@@ -67,8 +68,8 @@ import libroEspeculativoVertical2 from './assets/LibroEspeculativo_Vertical2.jpg
 const CATEGORIES = [
   { id: 'todos', label: 'Todos' },
   { id: 'design', label: 'Identidad & Branding' },
-  { id: 'editorial', label: 'Editorial & Impresos' },
-  { id: 'packaging', label: 'Packaging & Ilustración' },
+  { id: 'editorial', label: 'Editorial' },
+  { id: 'packaging', label: 'Packaging' },
   { id: 'digital', label: 'Diseño Digital & UI' },
   { id: 'motion', label: 'Motion Graphics' }
 ];
@@ -106,7 +107,7 @@ export const ALL_PROJECTS = [
     category: 'Motion Graphics',
     categoryKey: 'motion',
     description: 'Pieza audiovisual para la presentación del nuevo sistema de marca de la organización CESIDA.',
-    technologies: ['Motion Graphics', 'Comunicación Visual'],
+    technologies: ['Motion Graphics'],
     link: '',
     client: 'CESIDA (Coordinadora Estatal de VIH y Sida)',
     year: '2025',
@@ -124,7 +125,7 @@ export const ALL_PROJECTS = [
   {
     image: tdcHorizontal1,
     video: tdcVideo,
-    title: 'Teatros del Canal (TDC) ✦ Rediseño de Identidad',
+    title: 'Identidad Teatros del Canal ✦ Rediseño de Identidad',
     category: 'Identidad & Branding',
     categoryKey: 'design',
     description: 'Rediseño de la identidad visual de los Teatros del Canal de Madrid, unificando la oferta escénica y conectando con nuevos públicos a través de un sistema dinámico y contemporáneo.',
@@ -154,7 +155,7 @@ export const ALL_PROJECTS = [
     category: 'Editorial & Impresos',
     categoryKey: 'editorial',
     description: 'Diseño, maquetación y desarrollo visual para Input, una revista autoeditada por y para estudiantes de la Escuela Superior de Diseño (ESD) de Madrid.',
-    technologies: ['Editorial', 'Layout', 'Diseño de Información', 'InDesign'],
+    technologies: ['Editorial', 'Diseño de Información', 'InDesign'],
     link: '',
     client: 'ESD (Escuela Superior de Diseño de Madrid)',
     year: '2024',
@@ -203,7 +204,7 @@ export const ALL_PROJECTS = [
     category: 'Editorial & Impresos',
     categoryKey: 'editorial',
     description: 'Diseño, maquetación e ilustración para Cheesecake World, un libro visual que explora el universo de las tartas de queso a través de composiciones gráficas detalladas y narrativa visual gastronómica.',
-    technologies: ['Editorial', 'Layout', 'Ilustración', 'Diseño Visual'],
+    technologies: ['Editorial', 'Ilustración', 'Diseño Visual'],
     link: '',
     client: 'Proyecto Personal / Autoedición',
     year: '2025',
@@ -277,7 +278,7 @@ export const ALL_PROJECTS = [
     category: 'Editorial & Impresos',
     categoryKey: 'editorial',
     description: 'Diseño editorial y desarrollo interactivo para un libro especulativo centrado en la recuperación de la memoria impresa y el valor del papel.',
-    technologies: ['Editorial & Impresos', 'Desarrollo Web', 'Diseño Especulativo', 'Automatización', 'Chatbot'],
+    technologies: ['Editorial', 'Desarrollo Web', 'Diseño Especulativo', 'Automatización', 'Chatbot'],
     link: 'https://guia-practica-de-un-libro.vercel.app/',
     client: 'Proyecto Personal / Autoedición',
     year: '2025',
@@ -323,8 +324,13 @@ export default function AllProjects({ navigateTo, onSelectProject }) {
       <div className="all-projects-container">
         {/* Navigation & Header */}
         <header className="all-projects-header">
-          <button onClick={() => navigateTo('landing')} className="back-to-home-btn">
-            &larr; Volver al Inicio
+          <button
+            onClick={() => navigateTo('landing')}
+            className="back-to-home-btn"
+            aria-label="Volver al Inicio"
+          >
+            <ArrowLeft size={16} strokeWidth={2.2} />
+            <span>Volver al Inicio</span>
           </button>
           <div className="all-projects-title-block">
             <span className="all-projects-subtitle">Portfolio Completo</span>

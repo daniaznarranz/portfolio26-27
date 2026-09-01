@@ -125,9 +125,9 @@ textarea {
 }
 
 .glass-card:hover {
-  transform: translateY(-6px) scale(1.01);
+  transform: translateY(-4px);
   border-color: var(--color-dark);
-  box-shadow: 0 15px 35px rgba(26, 24, 25, 0.1), var(--shadow-accent);
+  box-shadow: 0 12px 30px rgba(26, 24, 25, 0.08), var(--shadow-accent);
 }
 
 /* Buttons with High Contrast Outlines */
@@ -168,7 +168,7 @@ textarea {
 }
 
 .btn-secondary:hover {
-  background-color: rgba(26, 24, 25, 0.05);
+  background-color: rgba(26, 24, 25, 0.14);
   color: var(--color-dark);
   border-color: var(--color-dark);
   transform: translateY(-2px);

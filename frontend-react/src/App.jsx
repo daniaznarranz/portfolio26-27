@@ -55,6 +55,22 @@ const DRIFT_ITEMS = [
 
 const PRELOADER_COLORS = ['#FF6000', '#1A1819', '#4B5563', '#374151'];
 
+function WhatsAppIcon({ size = 18, className = '' }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+      style={{ display: 'inline-block', verticalAlign: 'middle', flexShrink: 0 }}
+      aria-hidden="true"
+    >
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.456 5.711 1.457h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.414z" />
+    </svg>
+  );
+}
+
 function App() {
   const mainRef = useRef(null);
   const [currentView, setCurrentView] = useState('landing');
@@ -220,6 +236,20 @@ function App() {
   const [hasAnimatedLanding, setHasAnimatedLanding] = useState(false);
 
   useGSAP(() => {
+    // If not on landing page, ensure navbar is always visible and preloader is hidden
+    if (currentView !== 'landing') {
+      const preloader = document.querySelector('.preloader-overlay');
+      if (preloader) {
+        preloader.style.display = 'none';
+      }
+      gsap.set('.navbar-header', { y: 0 });
+      gsap.set(['.navbar-logo', '.navbar-capsule', '.navbar-cta'], { opacity: 1, y: 0 });
+      if (!hasAnimatedLanding) {
+        setHasAnimatedLanding(true);
+      }
+      return;
+    }
+
     if (hasAnimatedLanding) {
       // User is returning to landing page after initial animation already played
       // Skip preloader screen overlay
@@ -259,7 +289,7 @@ function App() {
       }
     });
 
-    // 1. Preloader entrance animation (Clean uniform slide up)
+    // 1. Preloader entrance animation (Clean uniform slide up with 0.5s added initial delay)
     tl.fromTo('.preloader-char',
       {
         yPercent: 100,
@@ -272,7 +302,7 @@ function App() {
         stagger: 0.02,
         ease: 'power4.out'
       },
-      '+=0.15'
+      '+=0.65'
     )
       // 2. Preloader exit (Fast exit slide up)
       .to('.preloader-overlay', {
@@ -284,41 +314,41 @@ function App() {
       // 4. Navbar slide down and elements fade-in
       .fromTo('.navbar-header',
         { y: -80 },
-        { y: 0, duration: 0.8, ease: 'power3.out' },
-        '-=0.4'
+        { y: 0, duration: 0.5, ease: 'power3.out' },
+        '-=0.45'
       )
       .fromTo(['.navbar-logo', '.navbar-capsule', '.navbar-cta'],
         { opacity: 0, y: -10 },
-        { opacity: 1, y: 0, duration: 0.6, stagger: 0.08, ease: 'power3.out' },
-        '-=0.5'
+        { opacity: 1, y: 0, duration: 0.4, stagger: 0.05, ease: 'power3.out' },
+        '-=0.35'
       )
 
-      // 5. Hero section elements slide up (Coordinated bouncy wave)
+      // 5. Hero section elements slide up (Coordinated snappy wave - 0.3s faster)
       .fromTo('.hero-subtitle',
         { opacity: 0, y: 15 },
-        { opacity: 1, y: 0, duration: 0.7, ease: 'back.out(1.7)' },
-        '-=0.3'
+        { opacity: 1, y: 0, duration: 0.45, ease: 'back.out(1.7)' },
+        '-=0.35'
       )
       .fromTo('.hero-title',
         { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' },
-        '-=0.5'
+        { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' },
+        '-=0.35'
       )
       .fromTo('.hero-desc',
         { opacity: 0, y: 15 },
-        { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' },
-        '-=0.5'
+        { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out' },
+        '-=0.35'
       )
       .fromTo('.hero-actions .btn',
         { opacity: 0, y: 10 },
-        { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'back.out(1.5)' },
-        '-=0.4'
+        { opacity: 1, y: 0, duration: 0.4, stagger: 0.08, ease: 'back.out(1.5)' },
+        '-=0.3'
       )
       // 6. DriftWall entrance
       .fromTo('.right-panel',
         { opacity: 0, scale: 0.98 },
-        { opacity: 1, scale: 1, duration: 1.0, ease: 'power2.out' },
-        '-=0.3'
+        { opacity: 1, scale: 1, duration: 0.65, ease: 'power2.out' },
+        '-=0.35'
       );
   }, { dependencies: [currentView, hasAnimatedLanding] });
 
@@ -393,267 +423,274 @@ function App() {
         {currentView === 'landing' ? (
           <ErrorBoundary onReset={() => navigateTo('landing')}>
             <>
-            {/* Split-Screen Main Layout */}
-            <div className="app-container" id="inicio">
-              {/* Left Content Panel */}
-              <div className="left-panel">
-                <main className="hero-content">
-                  <span className="hero-subtitle">Diseño Gráfico, UX/UI & Product Design</span>
-                  <h1 className="hero-title">
-                    Dando vida a ideas a través del <span className="text-highlight">diseño</span>
-                  </h1>
-                  <p className="hero-desc">
-                    Diseñador enfocado en el entorno digital, UX/UI y product design. Disfruto de entender cada reto para dar con la mejor solución, cuidar los detalles y construir proyectos tan sólidos como visuales.
-                  </p>
-                  <div className="hero-actions">
-                    <a 
-                      href="#proyectos" 
-                      onClick={(e) => {
-                        e.preventDefault();
-                        const el = document.getElementById('proyectos');
-                        if (el) {
-                          const headerOffset = 80;
-                          const elementPosition = el.getBoundingClientRect().top;
-                          const offsetPosition = elementPosition + window.scrollY - headerOffset;
-                          window.scrollTo({
-                            top: offsetPosition,
-                            behavior: 'smooth'
-                          });
-                        }
-                      }} 
-                      className="btn btn-primary"
-                    >
-                      Ver Proyectos
-                    </a>
-                    <a 
-                      href="#sobre-mi" 
-                      onClick={(e) => {
-                        e.preventDefault();
-                        const el = document.getElementById('sobre-mi');
-                        if (el) {
-                          const headerOffset = 80;
-                          const elementPosition = el.getBoundingClientRect().top;
-                          const offsetPosition = elementPosition + window.scrollY - headerOffset;
-                          window.scrollTo({
-                            top: offsetPosition,
-                            behavior: 'smooth'
-                          });
-                        }
-                      }} 
-                      className="btn btn-secondary"
-                    >
-                      Sobre Mí
-                    </a>
-                  </div>
-                </main>
+              {/* Split-Screen Main Layout */}
+              <div className="app-container" id="inicio">
+                {/* Left Content Panel */}
+                <div className="left-panel">
+                  <main className="hero-content">
+                    <span className="hero-subtitle">Diseño Gráfico, UX/UI & Product Design</span>
+                    <h1 className="hero-title">
+                      Dando vida a ideas a través del <span className="text-highlight">diseño</span>
+                    </h1>
+                    <p className="hero-desc">
+                      Diseñador enfocado en el entorno digital, UX/UI y product design. Disfruto de entender cada reto para dar con la mejor solución, cuidar los detalles y construir proyectos tan sólidos como visuales.
+                    </p>
+                    <div className="hero-actions">
+                      <button
+                        onClick={() => navigateTo('projects')}
+                        className="btn btn-primary"
+                      >
+                        Ver Proyectos
+                      </button>
+                      <a
+                        href="#sobre-mi"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          const el = document.getElementById('sobre-mi');
+                          if (el) {
+                            const headerOffset = 80;
+                            const elementPosition = el.getBoundingClientRect().top;
+                            const offsetPosition = elementPosition + window.scrollY - headerOffset;
+                            window.scrollTo({
+                              top: offsetPosition,
+                              behavior: 'smooth'
+                            });
+                          }
+                        }}
+                        className="btn btn-secondary"
+                      >
+                        Sobre Mí
+                      </a>
+                    </div>
+                  </main>
+                </div>
+
+                {/* Right Visual Panel with DriftWall */}
+                <div className="right-panel">
+                  <DriftWall
+                    items={DRIFT_ITEMS}
+                    columns={4}
+                    tileWidth={230}
+                    tileHeight={150}
+                    gap={14}
+                    tilt={18}
+                    turn={-22}
+                    perspective={1050}
+                    depth={120}
+                    speed={38}
+                    direction="up"
+                    variance={0.45}
+                    parallax={0.7}
+                    lift={44}
+                    fade={0.6}
+                    dim={0.8}
+                    overlayColor="#FFFFFF" /* Matches clean white canvas background */
+                    radius={18} /* Matches designer rounded feel */
+                    roll={9}
+                  />
+                </div>
               </div>
 
-              {/* Right Visual Panel with DriftWall */}
-              <div className="right-panel">
-                <DriftWall
-                  items={DRIFT_ITEMS}
-                  columns={4}
-                  tileWidth={230}
-                  tileHeight={150}
-                  gap={14}
-                  tilt={18}
-                  turn={-22}
-                  perspective={1050}
-                  depth={120}
-                  speed={38}
-                  direction="up"
-                  variance={0.45}
-                  parallax={0.7}
-                  lift={44}
-                  fade={0.6}
-                  dim={0.8}
-                  overlayColor="#FFFFFF" /* Matches clean white canvas background */
-                  radius={18} /* Matches designer rounded feel */
-                  roll={9}
+              {/* Latest Works Section (Proyectos) */}
+              <section id="proyectos" className="works-section">
+                <div className="section-container">
+                  <span className="section-subtitle">Portfolio</span>
+                  <h2 className="section-title">Últimos <span className="text-highlight">Trabajos</span></h2>
+                  <p className="section-desc">
+                    Una selección de trabajos de diferentes disciplinas donde el criterio visual, la estrategia y la usabilidad se encuentran para transformar conceptos en soluciones que realmente funcionan.
+                  </p>
+
+                  <div className="works-gallery-container">
+                    <AccordionGallery
+                      items={workItems}
+                      defaultIndex={2}
+                      expandRatio={0.58}
+                      trigger={(isTabletOrMobile || isTouchDevice) ? "click" : "hover"}
+                      grayscale={false}
+                      height={(isTabletOrMobile && !isLandscape) ? 400 : (viewportHeight < 500 ? 280 : (viewportHeight < 800 ? 420 : 620))}
+                      gap={12}
+                      radius={20}
+                      orientation={(isTabletOrMobile && !isLandscape) ? "vertical" : "horizontal"}
+                    />
+                    <div className="works-view-all">
+                      <button onClick={() => navigateTo('projects')} className="btn btn-secondary">
+                        Ver Todos los Proyectos &rarr;
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* Sobre Mí Section (Bento Grid Style) */}
+              <section id="sobre-mi" className="about-section">
+                <div className="section-container">
+                  {/* Background Giant Watermark Text */}
+                  <div className="about-bg-text">RANZ DSN</div>
+
+                  <div className="about-bento-grid">
+
+                    {/* Card 1: Main Copy */}
+                    <div className="about-card about-card-main glass-card">
+                      <h3 className="about-card-title">DISEÑO GRÁFICO, UX/UI & PRODUCT DESIGN</h3>
+                      <p className="about-card-text">
+                        Soy Daniel Aznar, diseñador gráfico con especial interés en entornos digitales. Me gusta entender bien cada proyecto antes de empezar, cuidar el proceso y llegar a soluciones pensadas y bien ejecutadas. Disfruto trabajando en equipo, comunicando de forma clara y aportando valor real, combinando criterio visual, tendencias actuales y una ejecución cuidada.
+                      </p>
+                      <div className="about-signature">Daniel Aznar</div>
+                    </div>
+
+                    {/* Card 2: Cutout Portrait */}
+                    <div className="about-card about-card-portrait glass-card">
+                      <span className="about-badge">GRÁFICO, UX/UI & PRODUCT DESIGNER</span>
+                      <div className="about-portrait-wrapper">
+                        <img src={developerPortrait} alt="Developer Cutout Portrait" className="about-portrait-img" />
+                      </div>
+                    </div>
+
+                    {/* Card 3: Skills Bento Card */}
+                    <div className="about-card about-card-skills glass-card">
+                      <h3 className="about-skills-title">HABILIDADES & HERRAMIENTAS</h3>
+                      <div className="about-skills-grid">
+                        <div className="skill-item">
+                          <div className="skill-info">
+                            <span className="skill-name">Figma / Product Design</span>
+                            <span className="skill-percent">0%</span>
+                          </div>
+                          <div className="skill-progress-bg">
+                            <div className="skill-progress-fill" data-percent="95" />
+                          </div>
+                        </div>
+
+                        <div className="skill-item">
+                          <div className="skill-info">
+                            <span className="skill-name">Suite Adobe / PS / AI / ID </span>
+                            <span className="skill-percent">0%</span>
+                          </div>
+                          <div className="skill-progress-bg">
+                            <div className="skill-progress-fill" data-percent="87" />
+                          </div>
+                        </div>
+
+                        <div className="skill-item">
+                          <div className="skill-info">
+                            <span className="skill-name">Diseño WEB</span>
+                            <span className="skill-percent">0%</span>
+                          </div>
+                          <div className="skill-progress-bg">
+                            <div className="skill-progress-fill" data-percent="95" />
+                          </div>
+                        </div>
+
+                        <div className="skill-item">
+                          <div className="skill-info">
+                            <span className="skill-name">IA design / Automatizaciones</span>
+                            <span className="skill-percent">0%</span>
+                          </div>
+                          <div className="skill-progress-bg">
+                            <div className="skill-progress-fill" data-percent="90" />
+                          </div>
+                        </div>
+
+                        <div className="skill-item">
+                          <div className="skill-info">
+                            <span className="skill-name">HTML / CSS / JavaScript</span>
+                            <span className="skill-percent">0%</span>
+                          </div>
+                          <div className="skill-progress-bg">
+                            <div className="skill-progress-fill" data-percent="90" />
+                          </div>
+                        </div>
+
+                        <div className="skill-item">
+                          <div className="skill-info">
+                            <span className="skill-name">Motion Graphics</span>
+                            <span className="skill-percent">0%</span>
+                          </div>
+                          <div className="skill-progress-bg">
+                            <div className="skill-progress-fill" data-percent="87" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </section>
+
+              {/* TextLoop Section Separator */}
+              <div className="loop-separator">
+                <TextLoop
+                  text="PRODUCT DESIGN ✦ UX/UI ✦ DISEÑO WEB ✦ BRANDING ✦ DISEÑO EDITORIAL ✦ PACKAGING ✦ MOTION GRAPHICS ✦ IA"
+                  shape="line"
+                  speed={45}
+                  direction="forward"
+                  separator="✦"
+                  fontSize={isTabletOrMobile ? 15 : 20}
+                  fontWeight={600}
+                  letterSpacing={isTabletOrMobile ? 4 : 6}
+                  uppercase
+                  color="#FF6000" /* Orange color loop */
+                  ribbon={false}
+                  pauseOnHover
                 />
               </div>
-            </div>
 
-            {/* Latest Works Section (Proyectos) */}
-            <section id="proyectos" className="works-section">
-              <div className="section-container">
-                <span className="section-subtitle">Portfolio</span>
-                <h2 className="section-title">Últimos <span className="text-highlight">Trabajos</span></h2>
-                <p className="section-desc">
-                  Una selección de trabajos de diferentes disciplinas donde el criterio visual, la estrategia y la usabilidad se encuentran para transformar conceptos en soluciones que realmente funcionan.
-                </p>
+              {/* Contacto Section */}
+              <section id="contacto" className="contact-section">
+                <div className="section-container">
+                  <span className="section-subtitle">Contacto</span>
+                  <h2 className="section-title">¿Tienes una <span className="text-highlight">Idea</span>?</h2>
+                  <p className="section-desc">
+                    ¡Colaboremos! Si buscas una nueva identidad para tu marca, un entorno web, la idea de una nueva app o cualquier tipo de idea relacionada con el diseño escribeme y podemos crear algo juntos.
+                  </p>
 
-                <div className="works-gallery-container">
-                  <AccordionGallery
-                    items={workItems}
-                    defaultIndex={2}
-                    expandRatio={0.58}
-                    trigger={(isTabletOrMobile || isTouchDevice) ? "click" : "hover"}
-                    grayscale={false}
-                    height={(isTabletOrMobile && !isLandscape) ? 400 : (viewportHeight < 500 ? 280 : (viewportHeight < 800 ? 420 : 620))}
-                    gap={12}
-                    radius={20}
-                    orientation={(isTabletOrMobile && !isLandscape) ? "vertical" : "horizontal"}
-                  />
-                  <div className="works-view-all">
-                    <button onClick={() => navigateTo('projects')} className="btn btn-secondary">
-                      Ver Todos los Proyectos &rarr;
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            {/* Sobre Mí Section (Bento Grid Style) */}
-            <section id="sobre-mi" className="about-section">
-              <div className="section-container">
-                {/* Background Giant Watermark Text */}
-                <div className="about-bg-text">RANZ DSN</div>
-
-                <div className="about-bento-grid">
-
-                  {/* Card 1: Main Copy */}
-                  <div className="about-card about-card-main glass-card">
-                    <h3 className="about-card-title">DISEÑO GRÁFICO, UX/UI & PRODUCT DESIGN</h3>
-                    <p className="about-card-text">
-                      Soy Daniel Aznar, diseñador gráfico con especial interés en entornos digitales. Me gusta entender bien cada proyecto antes de empezar, cuidar el proceso y llegar a soluciones pensadas y bien ejecutadas. Disfruto trabajando en equipo, comunicando de forma clara y aportando valor real, combinando criterio visual, tendencias actuales y una ejecución cuidada.
-                    </p>
-                    <div className="about-signature">Daniel Aznar</div>
-                  </div>
-
-                  {/* Card 2: Cutout Portrait */}
-                  <div className="about-card about-card-portrait glass-card">
-                    <span className="about-badge">GRÁFICO, UX/UI & PRODUCT DESIGNER</span>
-                    <div className="about-portrait-wrapper">
-                      <img src={developerPortrait} alt="Developer Cutout Portrait" className="about-portrait-img" />
-                    </div>
-                  </div>
-
-                  {/* Card 3: Skills Bento Card */}
-                  <div className="about-card about-card-skills glass-card">
-                    <h3 className="about-skills-title">HABILIDADES & HERRAMIENTAS</h3>
-                    <div className="about-skills-grid">
-                      <div className="skill-item">
-                        <div className="skill-info">
-                          <span className="skill-name">Figma / Product Design</span>
-                          <span className="skill-percent">0%</span>
+                  <div className="contact-card glass-card">
+                    <div className="contact-info">
+                      <h3 className="contact-name">Daniel Aznar</h3>
+                      <p className="contact-title">Diseñador Gráfico, UX/UI & Product Designer</p>
+                      <div className="contact-details">
+                        <div className="contact-detail-item">
+                          <span className="contact-detail-icon">✉️</span>
+                          <a href="mailto:daniaznarranz@gmail.com" className="contact-detail-link">daniaznarranz@gmail.com</a>
                         </div>
-                        <div className="skill-progress-bg">
-                          <div className="skill-progress-fill" data-percent="95" />
+                        <div className="contact-detail-item">
+                          <span className="contact-detail-icon">📞</span>
+                          <a href="tel:+34692449322" className="contact-detail-link">+34 692 44 93 22</a>
                         </div>
-                      </div>
-
-                      <div className="skill-item">
-                        <div className="skill-info">
-                          <span className="skill-name">Suite Adobe / PS / AI / ID </span>
-                          <span className="skill-percent">0%</span>
+                        <div className="contact-detail-item">
+                          <span className="contact-detail-icon">📸</span>
+                          <a href="https://www.instagram.com/ranz_dsn/" target="_blank" rel="noopener noreferrer" className="contact-detail-link">@ranz_dsn</a>
                         </div>
-                        <div className="skill-progress-bg">
-                          <div className="skill-progress-fill" data-percent="87" />
-                        </div>
-                      </div>
-
-                      <div className="skill-item">
-                        <div className="skill-info">
-                          <span className="skill-name">Diseño WEB / Desarrollo WEB</span>
-                          <span className="skill-percent">0%</span>
-                        </div>
-                        <div className="skill-progress-bg">
-                          <div className="skill-progress-fill" data-percent="95" />
-                        </div>
-                      </div>
-
-                      <div className="skill-item">
-                        <div className="skill-info">
-                          <span className="skill-name">IA design / Automatizaciones</span>
-                          <span className="skill-percent">0%</span>
-                        </div>
-                        <div className="skill-progress-bg">
-                          <div className="skill-progress-fill" data-percent="90" />
-                        </div>
-                      </div>
-
-                      <div className="skill-item">
-                        <div className="skill-info">
-                          <span className="skill-name">HTML / CSS / JavaScript</span>
-                          <span className="skill-percent">0%</span>
-                        </div>
-                        <div className="skill-progress-bg">
-                          <div className="skill-progress-fill" data-percent="90" />
-                        </div>
-                      </div>
-
-                      <div className="skill-item">
-                        <div className="skill-info">
-                          <span className="skill-name">Motion Graphics</span>
-                          <span className="skill-percent">0%</span>
-                        </div>
-                        <div className="skill-progress-bg">
-                          <div className="skill-progress-fill" data-percent="87" />
+                        <div className="contact-detail-item">
+                          <span className="contact-detail-icon">📍</span>
+                          <span>Madrid, España</span>
                         </div>
                       </div>
                     </div>
-                  </div>
 
-                </div>
-              </div>
-            </section>
-
-            {/* TextLoop Section Separator */}
-            <div className="loop-separator">
-              <TextLoop
-                text="PRODUCT DESIGN ✦ UX/UI ✦ DISEÑO WEB ✦ BRANDING ✦ DISEÑO EDITORIAL ✦ PACKAGING ✦ MOTION GRAPHICS ✦ IA"
-                shape="line"
-                speed={45}
-                direction="forward"
-                separator="✦"
-                fontSize={isTabletOrMobile ? 15 : 20}
-                fontWeight={600}
-                letterSpacing={isTabletOrMobile ? 4 : 6}
-                uppercase
-                color="#FF6000" /* Orange color loop */
-                ribbon={false}
-                pauseOnHover
-              />
-            </div>
-
-            {/* Contacto Section */}
-            <section id="contacto" className="contact-section">
-              <div className="section-container">
-                <span className="section-subtitle">Contacto</span>
-                <h2 className="section-title">¿Tienes una <span className="text-highlight">Idea</span>?</h2>
-                <p className="section-desc">
-                  ¡Colaboremos! Si buscas una nueva identidad para tu marca, un entorno web, la idea de una nueva app o cualquier tipo de idea relacionada con el diseño escribeme y podemos crear algo juntos.
-                </p>
-
-                <div className="contact-card glass-card">
-                  <div className="contact-info">
-                    <h3 className="contact-name">Daniel Aznar</h3>
-                    <p className="contact-title">Diseñador Gráfico, UX/UI & Product Designer</p>
-                    <div className="contact-details">
-                      <div className="contact-detail-item">
-                        <span className="contact-detail-icon">✉️</span>
-                        <a href="mailto:daniaznarranz@gmail.com" className="contact-detail-link">daniaznarranz@gmail.com</a>
-                      </div>
-                      <div className="contact-detail-item">
-                        <span className="contact-detail-icon">📍</span>
-                        <span>Madrid, España</span>
-                      </div>
+                    <div className="contact-actions">
+                      <a
+                        href="https://wa.me/34692449322?text=Hola%20Daniel%2C%20me%20gustar%C3%ADa%20consultar%20disponibilidad%20para%20un%20proyecto."
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn btn-primary"
+                      >
+                        <WhatsAppIcon size={18} />
+                        <span>Escribir por WhatsApp</span>
+                      </a>
+                      <a href="mailto:daniaznarranz@gmail.com" className="btn btn-primary">
+                        Enviar Email
+                      </a>
+                      <a href="https://www.linkedin.com/in/daniel-aznar-ranz/" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
+                        Ver LinkedIn
+                      </a>
+                      <a href="https://www.instagram.com/ranz_dsn/" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
+                        Ver Instagram
+                      </a>
                     </div>
                   </div>
-
-                  <div className="contact-actions">
-                    <a href="mailto:daniaznarranz@gmail.com" className="btn btn-primary">
-                      Enviar Email
-                    </a>
-                    <a href="https://www.linkedin.com/in/daniel-aznar-ranz/" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
-                      Ver LinkedIn
-                    </a>
-                  </div>
                 </div>
-              </div>
-            </section>
-          </>
+              </section>
+            </>
           </ErrorBoundary>
         ) : currentView === 'cv' ? (
           <ErrorBoundary onReset={() => navigateTo('landing')}>

@@ -1,15 +1,16 @@
 import React from 'react';
-import { 
-  ArrowLeft, 
-  Download, 
-  Mail, 
-  MapPin, 
-  Globe, 
-  Briefcase, 
-  GraduationCap, 
-  Sparkles, 
-  Layers, 
-  CheckCircle2, 
+import {
+  ArrowLeft,
+  Download,
+  Mail,
+  Phone,
+  MapPin,
+  Globe,
+  Briefcase,
+  GraduationCap,
+  Sparkles,
+  Layers,
+  CheckCircle2,
   Users,
   Code2,
   Palette
@@ -18,20 +19,40 @@ import './CvView.css';
 
 function LinkedinIcon({ size = 15, className = '' }) {
   return (
-    <svg 
-      width={size} 
-      height={size} 
-      viewBox="0 0 24 24" 
-      fill="none" 
-      stroke="currentColor" 
-      strokeWidth="2" 
-      strokeLinecap="round" 
-      strokeLinejoin="round" 
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       className={className}
     >
       <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
       <rect x="2" y="9" width="4" height="12" />
       <circle cx="4" cy="4" r="2" />
+    </svg>
+  );
+}
+
+function InstagramIcon({ size = 15, className = '' }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
     </svg>
   );
 }
@@ -46,8 +67,8 @@ export default function CvView({ navigateTo }) {
       {/* Action Bar (Hidden in Print) */}
       <div className="cv-action-bar-container">
         <div className="cv-action-bar">
-          <button 
-            onClick={() => navigateTo('landing')} 
+          <button
+            onClick={() => navigateTo('landing')}
             className="btn-action btn-back"
             aria-label="Volver al Portfolio"
           >
@@ -56,15 +77,15 @@ export default function CvView({ navigateTo }) {
           </button>
 
           <div className="cv-action-buttons">
-            <a 
-              href="mailto:daniaznarranz@gmail.com" 
+            <a
+              href="mailto:daniaznarranz@gmail.com"
               className="btn-action btn-secondary-action"
             >
               <Mail size={17} />
               <span>Contactar</span>
             </a>
-            <button 
-              onClick={handlePrint} 
+            <button
+              onClick={handlePrint}
               className="btn-action btn-primary-action"
             >
               <Download size={18} />
@@ -77,15 +98,11 @@ export default function CvView({ navigateTo }) {
       {/* Main CV Document Canvas */}
       <main className="cv-document-wrapper">
         <article className="cv-paper">
-          
+
           {/* Header Section */}
           <header className="cv-header">
             <div className="cv-header-main">
               <div className="cv-title-group">
-                <span className="cv-badge-status">
-                  <span className="status-dot"></span>
-                  Disponible para Nuevas Oportunidades
-                </span>
                 <h1 className="cv-name">Daniel Aznar Ranz</h1>
                 <p className="cv-role">Diseñador Gráfico · UX/UI & Product Designer</p>
               </div>
@@ -96,21 +113,34 @@ export default function CvView({ navigateTo }) {
                   <Mail size={15} className="contact-icon" />
                   <span>daniaznarranz@gmail.com</span>
                 </a>
-                <a 
-                  href="https://www.linkedin.com/in/daniel-aznar-ranz/" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
+                <a href="tel:+34692449322" className="cv-contact-item">
+                  <Phone size={15} className="contact-icon" />
+                  <span>+34 692 44 93 22</span>
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/daniel-aznar-ranz/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="cv-contact-item"
                 >
                   <LinkedinIcon size={15} className="contact-icon" />
                   <span>linkedin.com/in/daniel-aznar-ranz</span>
                 </a>
+                <a
+                  href="https://www.instagram.com/ranz_dsn/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cv-contact-item"
+                >
+                  <InstagramIcon size={15} className="contact-icon" />
+                  <span>@ranz_dsn</span>
+                </a>
                 <div className="cv-contact-item">
                   <MapPin size={15} className="contact-icon" />
                   <span>Madrid, España</span>
                 </div>
-                <button 
-                  onClick={() => navigateTo('landing')} 
+                <button
+                  onClick={() => navigateTo('landing')}
                   className="cv-contact-item cv-contact-link"
                 >
                   <Globe size={15} className="contact-icon" />
@@ -124,10 +154,10 @@ export default function CvView({ navigateTo }) {
 
           {/* 2-Column Grid Layout */}
           <div className="cv-grid-layout">
-            
+
             {/* Left Main Column: Perfil + Experiencia */}
             <div className="cv-main-col">
-              
+
               {/* Perfil Profesional */}
               <section className="cv-section">
                 <div className="cv-section-header">
@@ -135,7 +165,7 @@ export default function CvView({ navigateTo }) {
                   <h2 className="cv-section-title">Perfil Profesional</h2>
                 </div>
                 <p className="cv-summary-text">
-                  Diseñador Gráfico especializado en <strong>UX/UI y Product Design</strong>, con sólida visión estratégica y rigor visual. Enfoque integral centrado en entender cada proyecto desde la investigación y la conceptualización hasta prototipos interactivos de alta fidelidad y sistemas escalables. Capacidad contrastada de trabajo colaborativo en equipos multidisciplinares, liderazgo y gestión de personas, fusionando criterio estético de vanguardia, automatizaciones de flujos y comprensión del desarrollo web.
+                  Diseñador Gráfico con especial interés en <strong>WEB, UX/UI, product design y diseño digital</strong>, con sólida visión estratégica y rigor visual. Enfoque integral centrado en entender cada proyecto desde la investigación y la conceptualización hasta resultados óptimos y precisos. Capacidad contrastada de trabajo colaborativo en equipos multidisciplinares,  gestión de grupo, cooperación en el criterio y resolución de problemas.
                 </p>
               </section>
 
@@ -147,7 +177,7 @@ export default function CvView({ navigateTo }) {
                 </div>
 
                 <div className="cv-timeline">
-                  
+
                   {/* Kuorum.org */}
                   <div className="cv-timeline-item featured-experience">
                     <div className="cv-item-header">
@@ -255,7 +285,7 @@ export default function CvView({ navigateTo }) {
 
             {/* Right Sidebar Column: Skills, Stack, Educación, Idiomas */}
             <aside className="cv-sidebar-col">
-              
+
               {/* Competencias de Diseño */}
               <section className="cv-sidebar-section">
                 <div className="cv-section-header">
@@ -263,7 +293,7 @@ export default function CvView({ navigateTo }) {
                   <h2 className="cv-section-title">Diseño & UX/UI</h2>
                 </div>
                 <div className="cv-skill-chips">
-                  <span className="cv-chip">Figma (Avanzado)</span>
+                  <span className="cv-chip">Figma </span>
                   <span className="cv-chip">Design Systems</span>
                   <span className="cv-chip">UX Research & Testing</span>
                   <span className="cv-chip">Wireframing & Prototipado</span>
@@ -272,6 +302,7 @@ export default function CvView({ navigateTo }) {
                   <span className="cv-chip">Branding & Identidad Visual</span>
                   <span className="cv-chip">Diseño Editorial & Packaging</span>
                   <span className="cv-chip">Motion Graphics</span>
+                  <span className="cv-chip">Metodologías Ágiles y Design Thinking</span>
                 </div>
               </section>
 
@@ -283,7 +314,7 @@ export default function CvView({ navigateTo }) {
                 </div>
                 <ul className="cv-tools-list">
                   <li>
-                    <strong>Figma:</strong> Auto-layout, componentes interactivos, variables y prototipado.
+                    <strong>Figma:</strong> Auto-layout, componentes interactivos, variables, prototipado y design systems.
                   </li>
                   <li>
                     <strong>Automatizaciones de IA:</strong> Optimización de flujos creativos, prompting avanzado e integración de IA en el proceso de diseño.
@@ -307,13 +338,14 @@ export default function CvView({ navigateTo }) {
               <section className="cv-sidebar-section">
                 <div className="cv-section-header">
                   <Code2 size={18} className="section-icon text-highlight" />
-                  <h2 className="cv-section-title">Desarrollo & Tech</h2>
+                  <h2 className="cv-section-title">Desarrollo & WEB & IA</h2>
                 </div>
                 <div className="cv-skill-chips">
                   <span className="cv-chip">Automatizaciones de IA</span>
+                  <span className="cv-chip">IA adaptativa</span>
                   <span className="cv-chip">HTML5 / Semantic Web</span>
-                  <span className="cv-chip">CSS3 / Modern Layouts</span>
-                  <span className="cv-chip">JavaScript (ES6+)</span>
+                  <span className="cv-chip">CSS Modern</span>
+                  <span className="cv-chip">JavaScript</span>
                   <span className="cv-chip">React / Vite</span>
                   <span className="cv-chip">GSAP (Animaciones)</span>
                   <span className="cv-chip">IA Design & Flujos</span>
@@ -330,7 +362,7 @@ export default function CvView({ navigateTo }) {
                 <div className="cv-soft-skills">
                   <div className="cv-soft-item">
                     <CheckCircle2 size={15} className="check-icon" />
-                    <span>Liderazgo y gestión de equipos</span>
+                    <span> Gestión de equipos</span>
                   </div>
                   <div className="cv-soft-item">
                     <CheckCircle2 size={15} className="check-icon" />
@@ -359,8 +391,8 @@ export default function CvView({ navigateTo }) {
                 </div>
                 <div className="cv-edu-item">
                   <h3 className="cv-edu-degree">Grado en Diseño Gráfico</h3>
-                  <p className="cv-edu-school">Escuela Superior de Diseño de Madrid (ESD)</p>
-                  <span className="cv-edu-date">Enfoque en Diseño Visual, UX/UI, Identidad y Medios Interactivos</span>
+                  <p className="cv-edu-school">Escuela Superior de Diseño de Madrid (ESDM)</p>
+                  <span className="cv-edu-date">Enfoque en Diseño Digital</span>
                 </div>
               </section>
 
@@ -377,7 +409,7 @@ export default function CvView({ navigateTo }) {
                   </div>
                   <div className="cv-lang-item">
                     <span className="lang-name">Inglés</span>
-                    <span className="lang-level lang-level-learning">En aprendizaje activo 🚀</span>
+                    <span className="lang-level lang-level-learning">En aprendizaje activo</span>
                   </div>
                 </div>
               </section>

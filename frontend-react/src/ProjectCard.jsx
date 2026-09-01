@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { ArrowRight } from 'lucide-react';
 import './ProjectCard.css';
 
 export default function ProjectCard({ project, onSelect }) {
@@ -57,9 +58,12 @@ export default function ProjectCard({ project, onSelect }) {
             <span key={idx} className="project-card-tag">{tech}</span>
           ))}
         </div>
-        <span className="project-card-link">
-          Ver Detalles &rarr;
-        </span>
+        <div className="project-card-action">
+          <span className="project-card-btn">
+            <span>Ver Detalles</span>
+            <ArrowRight size={15} strokeWidth={2.2} className="project-card-btn-icon" />
+          </span>
+        </div>
       </div>
     </div>
   );
