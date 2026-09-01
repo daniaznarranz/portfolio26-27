@@ -168,8 +168,25 @@ function App() {
 
   const handleSelectProject = (project) => {
     setSelectedProject(project);
-    navigateTo('project-detail');
+    if (currentView === 'project-detail') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      navigateTo('project-detail');
+    }
   };
+
+  // Keyboard navigation: Escape returns to landing page
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        if (currentView !== 'landing') {
+          navigateTo('landing');
+        }
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [currentView]);
 
   const brumaProject = ALL_PROJECTS.find(p => p.title.toLowerCase().includes('bruma'));
   const tdcProject = ALL_PROJECTS.find(p => p.title.toLowerCase().includes('canal') || p.title.toLowerCase().includes('tdc'));
@@ -776,7 +793,7 @@ function App() {
             ) : currentView === 'project-detail' ? (
               selectedProject ? (
                 <ErrorBoundary onReset={() => navigateTo('landing')}>
-                  <ProjectDetail project={selectedProject} navigateTo={navigateTo} />
+                  <ProjectDetail project={selectedProject} navigateTo={navigateTo} onSelectProject={handleSelectProject} />
                 </ErrorBoundary>
               ) : (
                 <NotFoundView navigateTo={navigateTo} />

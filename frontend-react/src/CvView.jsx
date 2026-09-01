@@ -72,7 +72,7 @@ export default function CvView({ navigateTo }) {
           <button
             onClick={() => navigateTo('landing')}
             className="btn-action btn-back"
-            aria-label="Volver al Portfolio"
+            aria-label="Volver al Portfolio (Esc)"
           >
             <ArrowLeft size={18} />
             <span>Volver al Portfolio</span>
@@ -89,9 +89,11 @@ export default function CvView({ navigateTo }) {
             <button
               onClick={handlePrint}
               className="btn-action btn-primary-action"
+              aria-label="Descargar CV en PDF o Imprimir"
+              title="Guardar como PDF o Imprimir"
             >
               <Download size={18} />
-              <span>Descargar PDF / Imprimir</span>
+              <span>Descargar CV en PDF</span>
             </button>
           </div>
         </div>

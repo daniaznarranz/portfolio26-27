@@ -1,8 +1,9 @@
-import React from 'react';
-import { ArrowLeft, ExternalLink, Calendar, Tag, Briefcase, Award, X } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { ArrowLeft, ArrowRight, ExternalLink, Calendar, Tag, Briefcase, Award, X } from 'lucide-react';
+import { ALL_PROJECTS } from './projectsData';
 import './ProjectDetail.css';
 
-export default function ProjectDetail({ project, navigateTo }) {
+export default function ProjectDetail({ project, navigateTo, onSelectProject }) {
   if (!project) {
     return (
       <div className="project-detail-error">
@@ -14,6 +15,33 @@ export default function ProjectDetail({ project, navigateTo }) {
     );
   }
 
+  const currentIndex = ALL_PROJECTS.findIndex(p => p.title === project.title);
+  const prevProject = currentIndex > 0 ? ALL_PROJECTS[currentIndex - 1] : ALL_PROJECTS[ALL_PROJECTS.length - 1];
+  const nextProject = currentIndex < ALL_PROJECTS.length - 1 ? ALL_PROJECTS[currentIndex + 1] : ALL_PROJECTS[0];
+
+  const [activeImage, setActiveImage] = useState(null);
+
+  // Scroll to top on project change
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [project]);
+
+  // Keyboard navigation: ArrowLeft / ArrowRight to switch projects, Escape to close lightbox
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && activeImage) {
+        setActiveImage(null);
+        e.stopPropagation();
+      } else if (e.key === 'ArrowLeft' && !activeImage && prevProject && onSelectProject) {
+        onSelectProject(prevProject);
+      } else if (e.key === 'ArrowRight' && !activeImage && nextProject && onSelectProject) {
+        onSelectProject(nextProject);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [activeImage, prevProject, nextProject, onSelectProject]);
+
   // Check if project has a video or if the image is a video URL
   const isVideo = project.video || (project.image && (project.image.endsWith('.mp4') || project.image.includes('video')));
 
@@ -22,21 +50,20 @@ export default function ProjectDetail({ project, navigateTo }) {
     ? project.gallery
     : [
         project.image,
-        'https://images.unsplash.com/photo-1509343256512-d77a5cb3791b?auto=format&fit=crop&w=800&q=80', // Stationary mock
-        'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80', // Brochure layout
-        'https://images.unsplash.com/photo-1561070791-26c113006238?auto=format&fit=crop&w=800&q=80'  // Poster design
+        'https://images.unsplash.com/photo-1509343256512-d77a5cb3791b?auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1561070791-26c113006238?auto=format&fit=crop&w=800&q=80'
       ];
-
-  const [activeImage, setActiveImage] = React.useState(null);
 
   return (
     <div className="project-detail-view">
       <div className="project-detail-container">
-        {/* Navigation back button */}
+        {/* Top Navigation Back */}
         <nav className="project-detail-nav">
-          <button onClick={() => navigateTo('projects')} className="back-btn">
+          <button onClick={() => navigateTo('projects')} className="back-btn" aria-label="Volver a Proyectos (Esc)">
             <ArrowLeft size={18} /> Volver a Proyectos
           </button>
+          <span className="keyboard-nav-hint">Usa las teclas ← / → para navegar o Esc para salir</span>
         </nav>
 
         {/* Hero Header Area (Title left, Subtitle right) */}
@@ -67,6 +94,8 @@ export default function ProjectDetail({ project, navigateTo }) {
               src={project.image} 
               alt={project.title} 
               className="project-hero-media" 
+              loading="lazy"
+              decoding="async"
               style={project.containImages ? { objectFit: 'contain', backgroundColor: '#ffffff', padding: '20px' } : {}} 
             />
           )}
@@ -100,8 +129,6 @@ export default function ProjectDetail({ project, navigateTo }) {
                 <span className="metadata-text-label">ROL</span>
                 <span className="metadata-text-value">{project.role || "Proyección experimental completa"}</span>
               </div>
-
-
             </div>
           </div>
 
@@ -164,6 +191,8 @@ export default function ProjectDetail({ project, navigateTo }) {
                       src={imgUrl} 
                       alt={`Showcase view ${idx + 1}`} 
                       className="showcase-img" 
+                      loading="lazy"
+                      decoding="async"
                       style={project.containImages ? { objectFit: 'contain', backgroundColor: '#ffffff', padding: '20px' } : {}}
                     />
                   )}
@@ -173,7 +202,49 @@ export default function ProjectDetail({ project, navigateTo }) {
           </div>
         </section>
 
-        {/* Footer CTA navigation */}
+        {/* Project Next/Prev Navigation Pagination */}
+        <section className="project-detail-pagination-wrapper">
+          <div className="project-detail-pagination">
+            {prevProject && (
+              <button
+                type="button"
+                className="pagination-card pagination-prev"
+                onClick={() => onSelectProject ? onSelectProject(prevProject) : navigateTo('projects')}
+                aria-label={`Ver proyecto anterior: ${prevProject.title.split(' ✦ ')[0]}`}
+              >
+                <span className="pagination-label">
+                  <ArrowLeft size={16} /> PROYECTO ANTERIOR
+                </span>
+                <span className="pagination-project-name">{prevProject.title.split(' ✦ ')[0]}</span>
+              </button>
+            )}
+
+            <button
+              type="button"
+              onClick={() => navigateTo('projects')}
+              className="pagination-center-btn"
+              aria-label="Ver todos los proyectos"
+            >
+              <span>Ver Archivo Completo</span>
+            </button>
+
+            {nextProject && (
+              <button
+                type="button"
+                className="pagination-card pagination-next"
+                onClick={() => onSelectProject ? onSelectProject(nextProject) : navigateTo('projects')}
+                aria-label={`Ver siguiente proyecto: ${nextProject.title.split(' ✦ ')[0]}`}
+              >
+                <span className="pagination-label">
+                  SIGUIENTE PROYECTO <ArrowRight size={16} />
+                </span>
+                <span className="pagination-project-name">{nextProject.title.split(' ✦ ')[0]}</span>
+              </button>
+            )}
+          </div>
+        </section>
+
+        {/* Footer CTA */}
         <footer className="project-detail-footer">
           <button onClick={() => navigateTo('projects')} className="btn btn-secondary">
             <ArrowLeft size={16} /> Volver al Archivo
@@ -189,7 +260,7 @@ export default function ProjectDetail({ project, navigateTo }) {
       {/* Lightbox / Image Viewer Modal */}
       {activeImage && (
         <div className="project-detail-lightbox" onClick={() => setActiveImage(null)}>
-          <button className="lightbox-close" onClick={() => setActiveImage(null)}>
+          <button className="lightbox-close" onClick={() => setActiveImage(null)} aria-label="Cerrar vista completa (Esc)">
             <X size={36} />
           </button>
           <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
