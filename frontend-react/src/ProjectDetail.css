@@ -236,6 +236,46 @@
   margin-bottom: 1.8rem;
 }
 
+.text-column strong {
+  font-weight: 700;
+  color: var(--color-dark);
+}
+
+/* Chatbot Callout Box - Simple, clean, editorial layout */
+.project-chatbot-callout {
+  background: var(--bg-secondary);
+  border: 2px solid var(--color-dark);
+  border-radius: 16px;
+  padding: 1.5rem 1.8rem;
+  margin: 1.8rem 0 2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.chatbot-callout-tag {
+  font-family: var(--font-headers);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  display: inline-block;
+  margin-bottom: 0.25rem;
+}
+
+.project-chatbot-callout .chatbot-callout-text {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--color-dark);
+  margin-bottom: 0;
+}
+
+.project-chatbot-callout strong {
+  font-weight: 700;
+  color: var(--color-dark);
+}
+
 /* Technology Pill tags */
 .project-detail-tags {
   display: flex;
@@ -336,9 +376,9 @@
   transform: scale(1.03);
 }
 
-/* Project Pagination Section */
+/* Project Pagination Section - Pill buttons matching site style */
 .project-detail-pagination-wrapper {
-  margin-top: 3.5rem;
+  margin-top: 4rem;
   padding-top: 2.5rem;
   border-top: 2px solid var(--color-dark);
 }
@@ -346,101 +386,109 @@
 .project-detail-pagination {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
-  gap: 1.5rem;
-  align-items: stretch;
-}
-
-.pagination-card {
-  background: var(--bg-secondary);
-  border: 2px solid var(--color-dark);
-  border-radius: 16px;
-  padding: 1.25rem 1.6rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  cursor: pointer;
-  text-align: left;
-  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: var(--shadow-premium);
-  font-family: inherit;
-}
-
-.pagination-card.pagination-next {
-  text-align: right;
-  align-items: flex-end;
-}
-
-.pagination-card:hover {
-  background: var(--color-primary);
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-accent);
-}
-
-.pagination-card:hover .pagination-label,
-.pagination-card:hover .pagination-project-name {
-  color: var(--color-white);
-}
-
-.pagination-label {
-  font-family: var(--font-headers);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  color: var(--color-text-muted);
-  display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  transition: color 0.2s ease;
+  gap: 1.25rem;
+  width: 100%;
 }
 
-.pagination-project-name {
-  font-family: var(--font-headers);
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--color-dark);
-  transition: color 0.2s ease;
+.pagination-side {
+  display: flex;
+  align-items: center;
+  min-width: 0;
 }
 
-.pagination-center-btn {
+.pagination-side-prev {
+  justify-content: flex-start;
+}
+
+.pagination-side-center {
+  justify-content: center;
+}
+
+.pagination-side-next {
+  justify-content: flex-end;
+}
+
+.pagination-btn {
   background: transparent;
   border: 2px solid var(--color-dark);
+  color: var(--color-dark);
+  font-family: var(--font-headers);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.65rem 1.4rem;
   border-radius: 9999px;
-  padding: 0 1.6rem;
-  height: 52px;
-  align-self: center;
+  cursor: pointer;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  font-family: var(--font-headers);
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--color-dark);
-  cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  gap: 0.6rem;
+  transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
   white-space: nowrap;
 }
 
-.pagination-center-btn:hover {
-  background: var(--color-dark);
-  color: var(--color-white);
-  transform: scale(1.03);
+.pagination-btn strong {
+  font-weight: 700;
 }
 
-@media (max-width: 868px) {
+.pagination-btn-name {
+  white-space: nowrap;
+}
+
+.pagination-btn .btn-arrow-icon {
+  flex-shrink: 0;
+  transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.pagination-btn:hover {
+  background: var(--color-dark);
+  color: var(--color-white);
+  box-shadow: 0 4px 14px rgba(26, 24, 25, 0.15);
+}
+
+.pagination-btn:hover strong {
+  color: var(--color-white);
+}
+
+.pagination-btn-prev:hover {
+  transform: translateX(-4px);
+}
+
+.pagination-btn-prev:hover .btn-arrow-icon {
+  transform: translateX(-3px);
+}
+
+.pagination-btn-next:hover {
+  transform: translateX(4px);
+}
+
+.pagination-btn-next:hover .btn-arrow-icon {
+  transform: translateX(3px);
+}
+
+.pagination-btn-center:hover {
+  transform: translateY(-2px);
+}
+
+@media (max-width: 968px) {
   .project-detail-pagination {
-    grid-template-columns: 1fr;
-    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.85rem;
   }
 
-  .pagination-card.pagination-next {
-    text-align: left;
-    align-items: flex-start;
-  }
-
-  .pagination-center-btn {
+  .pagination-side {
     width: 100%;
+    justify-content: center;
+  }
+
+  .pagination-side-center {
     order: 3;
-    height: 46px;
+  }
+
+  .pagination-btn {
+    justify-content: center;
+    width: 100%;
   }
 }
 

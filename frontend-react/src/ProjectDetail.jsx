@@ -3,6 +3,26 @@ import { ArrowLeft, ArrowRight, ExternalLink, Calendar, Tag, Briefcase, Award, X
 import { ALL_PROJECTS } from './projectsData';
 import './ProjectDetail.css';
 
+// Simple markdown-style bold parser (pure React, no DOM manipulation)
+function renderFormattedText(text) {
+  if (typeof text !== 'string') return text;
+  const parts = text.split(/(\*\*.*?\*\*)/g);
+  return parts.map((part, index) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      return <strong key={index}>{part.slice(2, -2)}</strong>;
+    }
+    return part;
+  });
+}
+
+// Truncate title with ellipsis if it exceeds character limit
+function truncateTitle(title, maxChars = 16) {
+  if (!title) return '';
+  const cleanTitle = title.split(' ✦ ')[0].trim();
+  if (cleanTitle.length <= maxChars) return cleanTitle;
+  return cleanTitle.slice(0, maxChars).trim() + '...';
+}
+
 export default function ProjectDetail({ project, navigateTo, onSelectProject }) {
   if (!project) {
     return (
@@ -63,7 +83,7 @@ export default function ProjectDetail({ project, navigateTo, onSelectProject }) 
           <button onClick={() => navigateTo('projects')} className="back-btn" aria-label="Volver a Proyectos (Esc)">
             <ArrowLeft size={18} /> Volver a Proyectos
           </button>
-          <span className="keyboard-nav-hint">Usa las teclas ← / → para navegar o Esc para salir</span>
+          <span className="keyboard-nav-hint">Usa las teclas ← / → para navegar entre proyectos o Esc para salir</span>
         </nav>
 
         {/* Hero Header Area (Title left, Subtitle right) */}
@@ -150,11 +170,39 @@ export default function ProjectDetail({ project, navigateTo, onSelectProject }) 
             </div>
 
             {project.details && project.details.length > 0 ? (
-              project.details.map((paragraph, idx) => (
-                <p key={idx}>{paragraph}</p>
-              ))
+              (() => {
+                const narrativeParagraphs = [];
+                const chatbotParagraphs = [];
+
+                project.details.forEach((p) => {
+                  if (typeof p === 'string' && p.toLowerCase().includes('chatbot')) {
+                    chatbotParagraphs.push(p);
+                  } else {
+                    narrativeParagraphs.push(p);
+                  }
+                });
+
+                return (
+                  <>
+                    {narrativeParagraphs.map((paragraph, idx) => (
+                      <p key={`narrative-${idx}`}>{renderFormattedText(paragraph)}</p>
+                    ))}
+
+                    {chatbotParagraphs.length > 0 && (
+                      <div className="project-chatbot-callout">
+                        <span className="chatbot-callout-tag">Utilización del Chatbot</span>
+                        {chatbotParagraphs.map((paragraph, idx) => (
+                          <p key={`chatbot-${idx}`} className="chatbot-callout-text">
+                            {renderFormattedText(paragraph)}
+                          </p>
+                        ))}
+                      </div>
+                    )}
+                  </>
+                );
+              })()
             ) : (
-              <p>{project.description}</p>
+              <p>{renderFormattedText(project.description)}</p>
             )}
           </div>
         </section>
@@ -205,42 +253,46 @@ export default function ProjectDetail({ project, navigateTo, onSelectProject }) 
         {/* Project Next/Prev Navigation Pagination */}
         <section className="project-detail-pagination-wrapper">
           <div className="project-detail-pagination">
-            {prevProject && (
+            <div className="pagination-side pagination-side-prev">
+              {prevProject && (
+                <button
+                  type="button"
+                  className="pagination-btn pagination-btn-prev"
+                  onClick={() => onSelectProject ? onSelectProject(prevProject) : navigateTo('projects')}
+                  title={`Ver proyecto anterior: ${prevProject.title.split(' ✦ ')[0]}`}
+                  aria-label={`Proyecto anterior: ${prevProject.title.split(' ✦ ')[0]}`}
+                >
+                  <ArrowLeft size={16} strokeWidth={2.2} className="btn-arrow-icon" />
+                  <span>Anterior: <strong className="pagination-btn-name">{truncateTitle(prevProject.title, 16)}</strong></span>
+                </button>
+              )}
+            </div>
+
+            <div className="pagination-side pagination-side-center">
               <button
                 type="button"
-                className="pagination-card pagination-prev"
-                onClick={() => onSelectProject ? onSelectProject(prevProject) : navigateTo('projects')}
-                aria-label={`Ver proyecto anterior: ${prevProject.title.split(' ✦ ')[0]}`}
+                onClick={() => navigateTo('projects')}
+                className="pagination-btn pagination-btn-center"
+                aria-label="Ver todos los proyectos"
               >
-                <span className="pagination-label">
-                  <ArrowLeft size={16} /> PROYECTO ANTERIOR
-                </span>
-                <span className="pagination-project-name">{prevProject.title.split(' ✦ ')[0]}</span>
+                <span>Ver todos los proyectos</span>
               </button>
-            )}
+            </div>
 
-            <button
-              type="button"
-              onClick={() => navigateTo('projects')}
-              className="pagination-center-btn"
-              aria-label="Ver todos los proyectos"
-            >
-              <span>Ver Archivo Completo</span>
-            </button>
-
-            {nextProject && (
-              <button
-                type="button"
-                className="pagination-card pagination-next"
-                onClick={() => onSelectProject ? onSelectProject(nextProject) : navigateTo('projects')}
-                aria-label={`Ver siguiente proyecto: ${nextProject.title.split(' ✦ ')[0]}`}
-              >
-                <span className="pagination-label">
-                  SIGUIENTE PROYECTO <ArrowRight size={16} />
-                </span>
-                <span className="pagination-project-name">{nextProject.title.split(' ✦ ')[0]}</span>
-              </button>
-            )}
+            <div className="pagination-side pagination-side-next">
+              {nextProject && (
+                <button
+                  type="button"
+                  className="pagination-btn pagination-btn-next"
+                  onClick={() => onSelectProject ? onSelectProject(nextProject) : navigateTo('projects')}
+                  title={`Ver siguiente proyecto: ${nextProject.title.split(' ✦ ')[0]}`}
+                  aria-label={`Siguiente proyecto: ${nextProject.title.split(' ✦ ')[0]}`}
+                >
+                  <span>Siguiente: <strong className="pagination-btn-name">{truncateTitle(nextProject.title, 16)}</strong></span>
+                  <ArrowRight size={16} strokeWidth={2.2} className="btn-arrow-icon" />
+                </button>
+              )}
+            </div>
           </div>
         </section>
 

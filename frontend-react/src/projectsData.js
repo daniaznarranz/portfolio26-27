@@ -83,9 +83,11 @@ export const ALL_PROJECTS = [
     role: 'Diseñador Editorial & Desarrollador Web',
     tagline: 'Guía práctica para recuperar los libros',
     details: [
-      'Un proyecto de diseño especulativo y editorial que explora la preservación física de los libros en un futuro digital, ofreciendo instrucciones físicas y teóricas sobre la durabilidad, el valor del soporte papel y los métodos de conservación creativa.',
-      'La propuesta incluye el diseño del libro físico en sí, prestando especial atención a la tipografía, la composición reticular y la materialidad de la pieza editorial.',
-      'Complementando el libro físico, se ha desarrollado una experiencia web interactiva que funciona como una guía de recuperación dinámica, permitiendo al usuario explorar las diferentes fases del proyecto de forma interactiva y fluida.'
+      'En el año 2050, los modelos de lenguaje han sustituido por completo a los buscadores y el libro tradicional ha desaparecido de la vida cotidiana, relegado a un objeto de coleccionismo y lujo inaccesible para las nuevas generaciones. Ante esta pérdida de memoria histórica, este proyecto de diseño especulativo responde a un encargo institucional orientado a reintroducir la cultura impresa en el imaginario colectivo de una juventud que jamás ha sostenido un volumen entre sus manos.',
+      'La propuesta se articula desde la perspectiva de un diseñador de transición (nacido a principios de los 2000 y testigo directo del cambio de paradigma) que utiliza su doble rol de creador y padre como metodología de trabajo. Al convivir con un usuario representativo en casa, cada decisión formal, conceptual y analítica es contrastada directamente con su propio hijo, midiendo en tiempo real la fricción y el asombro que provoca un objeto puramente analógico en una mente nativa digital.',
+      'El proyecto se materializa a través de un ecosistema dual: una pieza editorial física que reivindica el peso, la tipografía, la composición reticular y la durabilidad del papel frente a lo efímero, junto a una experiencia web interactiva diseñada como guía dinámica de rescate y preservación, trazando un puente tangible entre la memoria histórica y el entorno tecnológico del presente.',
+      '**El chatbot de la web** intentará siempre que utilices el libro como recomendación, con una **doble insistencia** te explicará la consulta que has pedido.',
+      'Puedes probar palabras como: **GUTENBERG**, **PAPIRO** o **ESCRITURA** para poner a prueba el chatbot.',
     ],
     gallery: [
       { url: libroEspeculativoHorizontal1, type: 'full-width' },
