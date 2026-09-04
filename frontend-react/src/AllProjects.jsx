@@ -18,13 +18,13 @@ export default function AllProjects({ navigateTo, onSelectProject }) {
   useGSAP(() => {
     // Settle dynamic entry transition for filtered items
     gsap.fromTo('.project-card',
-      { opacity: 0, y: 25 },
+      { opacity: 0, y: 18 },
       {
         opacity: 1,
         y: 0,
-        duration: 0.7,
-        stagger: 0.06,
-        ease: 'back.out(1.5)' /* Cheerful bouncy stagger */
+        duration: 0.5,
+        stagger: 0.05,
+        ease: 'power3.out'
       }
     );
   }, { dependencies: [activeCategory] });

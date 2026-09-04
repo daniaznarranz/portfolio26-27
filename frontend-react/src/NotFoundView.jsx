@@ -11,16 +11,16 @@ export default function NotFoundView({ navigateTo }) {
 
     // Elegant GSAP animation for 404 elements
     gsap.fromTo(el.querySelector('.nf-number-4-left'), 
-      { x: -80, opacity: 0, rotate: -15 }, 
-      { x: 0, opacity: 1, rotate: 0, duration: 0.55, ease: 'back.out(1.5)' }
+      { x: -50, opacity: 0, rotate: -8 }, 
+      { x: 0, opacity: 1, rotate: 0, duration: 0.5, ease: 'power3.out' }
     );
     gsap.fromTo(el.querySelector('.nf-number-0'), 
-      { scale: 0.85, opacity: 0 }, 
-      { scale: 1, opacity: 1, duration: 0.5, ease: 'back.out(1.7)', delay: 0.12 }
+      { scale: 0.9, opacity: 0 }, 
+      { scale: 1, opacity: 1, duration: 0.45, ease: 'power3.out', delay: 0.1 }
     );
     gsap.fromTo(el.querySelector('.nf-number-4-right'), 
-      { x: 80, opacity: 0, rotate: 15 }, 
-      { x: 0, opacity: 1, rotate: 0, duration: 0.55, ease: 'back.out(1.5)', delay: 0.22 }
+      { x: 50, opacity: 0, rotate: 8 }, 
+      { x: 0, opacity: 1, rotate: 0, duration: 0.5, ease: 'power3.out', delay: 0.18 }
     );
     gsap.fromTo(el.querySelector('.nf-content-inner'), 
       { y: 20, opacity: 0 }, 

@@ -407,25 +407,25 @@ function App() {
         '-=0.35'
       )
 
-      // 5. Hero section elements slide up (Coordinated snappy wave - 0.3s faster)
+      // 5. Hero section elements slide up (Coordinated snappy wave - clean exponential easing)
       .fromTo('.hero-subtitle',
-        { opacity: 0, y: 15 },
-        { opacity: 1, y: 0, duration: 0.45, ease: 'back.out(1.7)' },
+        { opacity: 0, y: 12 },
+        { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out' },
         '-=0.35'
       )
       .fromTo('.hero-title',
-        { opacity: 0, y: 20 },
+        { opacity: 0, y: 18 },
         { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' },
         '-=0.35'
       )
       .fromTo('.hero-desc',
-        { opacity: 0, y: 15 },
+        { opacity: 0, y: 14 },
         { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out' },
         '-=0.35'
       )
       .fromTo('.hero-actions .btn',
         { opacity: 0, y: 10 },
-        { opacity: 1, y: 0, duration: 0.4, stagger: 0.08, ease: 'back.out(1.5)' },
+        { opacity: 1, y: 0, duration: 0.4, stagger: 0.08, ease: 'power3.out' },
         '-=0.3'
       )
       // 6. DriftWall entrance
@@ -436,50 +436,25 @@ function App() {
       );
   }, { dependencies: [currentView, hasAnimatedLanding] });
 
-  // Animation for Skills Section on Landing View
+  // Animation for Capabilities Section on Landing View
   useGSAP(() => {
     if (currentView !== 'landing') return;
 
-    const skillBars = gsap.utils.toArray('.skill-progress-fill');
-
-    skillBars.forEach(bar => {
-      const targetPercent = parseInt(bar.getAttribute('data-percent'), 10);
-      const percentLabel = bar.closest('.skill-item').querySelector('.skill-percent');
-
-      // Animate progress bar fill width
-      gsap.fromTo(bar,
-        { width: '0%' },
-        {
-          width: `${targetPercent}%`,
-          duration: 1.6,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: bar,
-            start: 'top 92%',
-            toggleActions: 'play none none none'
-          }
-        }
-      );
-
-      // Animate percentage text count-up
-      const counter = { value: 0 };
-      gsap.to(counter, {
-        value: targetPercent,
-        duration: 1.6,
-        ease: 'power2.out',
-        roundProps: 'value',
-        onUpdate: () => {
-          if (percentLabel) {
-            percentLabel.textContent = `${counter.value}%`;
-          }
-        },
+    gsap.fromTo('.capability-card',
+      { opacity: 0, y: 16 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        stagger: 0.07,
+        ease: 'power3.out',
         scrollTrigger: {
-          trigger: bar,
-          start: 'top 92%',
+          trigger: '.about-card-skills',
+          start: 'top 85%',
           toggleActions: 'play none none none'
         }
-      });
-    });
+      }
+    );
   }, { dependencies: [currentView] });
 
   return (
@@ -630,67 +605,74 @@ function App() {
                       </div>
                     </div>
 
-                    {/* Card 3: Skills Bento Card */}
+                    {/* Card 3: Disciplines & Capabilities Bento Card */}
                     <div className="about-card about-card-skills glass-card">
-                      <h3 className="about-skills-title">HABILIDADES & HERRAMIENTAS</h3>
-                      <div className="about-skills-grid">
-                        <div className="skill-item">
-                          <div className="skill-info">
-                            <span className="skill-name">Figma / Product Design</span>
-                            <span className="skill-percent">0%</span>
+                      <div className="about-skills-header">
+                        <span className="about-skills-tag">Core Stack & Disciplinas</span>
+                        <h3 className="about-skills-title">DISCIPLINAS & HERRAMIENTAS</h3>
+                      </div>
+                      <div className="about-capabilities-grid">
+                        <div className="capability-card">
+                          <div className="capability-top">
+                            <span className="capability-name">Product & UX/UI</span>
+                            <span className="capability-badge">Producto</span>
                           </div>
-                          <div className="skill-progress-bg">
-                            <div className="skill-progress-fill" data-percent="95" />
-                          </div>
-                        </div>
-
-                        <div className="skill-item">
-                          <div className="skill-info">
-                            <span className="skill-name">Suite Adobe / PS / AI / ID </span>
-                            <span className="skill-percent">0%</span>
-                          </div>
-                          <div className="skill-progress-bg">
-                            <div className="skill-progress-fill" data-percent="87" />
-                          </div>
-                        </div>
-
-                        <div className="skill-item">
-                          <div className="skill-info">
-                            <span className="skill-name">Diseño WEB</span>
-                            <span className="skill-percent">0%</span>
-                          </div>
-                          <div className="skill-progress-bg">
-                            <div className="skill-progress-fill" data-percent="95" />
+                          <p className="capability-desc">
+                            Diseño de interfaces, design systems escalables, wireframing, flujos de usuario y prototipado de alta fidelidad.
+                          </p>
+                          <div className="capability-tags">
+                            <span className="cap-tag">Figma</span>
+                            <span className="cap-tag">Design Systems</span>
+                            <span className="cap-tag">UI Architecture</span>
+                            <span className="cap-tag">Prototyping</span>
                           </div>
                         </div>
 
-                        <div className="skill-item">
-                          <div className="skill-info">
-                            <span className="skill-name">IA design / Automatizaciones</span>
-                            <span className="skill-percent">0%</span>
+                        <div className="capability-card">
+                          <div className="capability-top">
+                            <span className="capability-name">Diseño Visual & Marca</span>
+                            <span className="capability-badge">Identidad</span>
                           </div>
-                          <div className="skill-progress-bg">
-                            <div className="skill-progress-fill" data-percent="90" />
-                          </div>
-                        </div>
-
-                        <div className="skill-item">
-                          <div className="skill-info">
-                            <span className="skill-name">HTML / CSS / JavaScript</span>
-                            <span className="skill-percent">0%</span>
-                          </div>
-                          <div className="skill-progress-bg">
-                            <div className="skill-progress-fill" data-percent="90" />
+                          <p className="capability-desc">
+                            Dirección de arte, packaging, diseño editorial y motion graphics aplicado a identidad de marca.
+                          </p>
+                          <div className="capability-tags">
+                            <span className="cap-tag">Branding</span>
+                            <span className="cap-tag">Motion Graphics</span>
+                            <span className="cap-tag">After Effects</span>
+                            <span className="cap-tag">Suite Adobe</span>
                           </div>
                         </div>
 
-                        <div className="skill-item">
-                          <div className="skill-info">
-                            <span className="skill-name">Motion Graphics</span>
-                            <span className="skill-percent">0%</span>
+                        <div className="capability-card">
+                          <div className="capability-top">
+                            <span className="capability-name">Creative Code & Web</span>
+                            <span className="capability-badge">Frontend</span>
                           </div>
-                          <div className="skill-progress-bg">
-                            <div className="skill-progress-fill" data-percent="87" />
+                          <p className="capability-desc">
+                            Desarrollo web moderno con foco en rigor tipográfico, estándares accesibles y microinteracciones pulidas.
+                          </p>
+                          <div className="capability-tags">
+                            <span className="cap-tag">HTML5 / CSS3</span>
+                            <span className="cap-tag">JavaScript</span>
+                            <span className="cap-tag">React</span>
+                            <span className="cap-tag">Responsive</span>
+                          </div>
+                        </div>
+
+                        <div className="capability-card">
+                          <div className="capability-top">
+                            <span className="capability-name">UI Motion & Flujos IA</span>
+                            <span className="capability-badge">Interacción</span>
+                          </div>
+                          <p className="capability-desc">
+                            Microinteracciones web fluidas, animación interactiva con GSAP y automatización de procesos con IA.
+                          </p>
+                          <div className="capability-tags">
+                            <span className="cap-tag">GSAP</span>
+                            <span className="cap-tag">UI Motion</span>
+                            <span className="cap-tag">Microinteracciones</span>
+                            <span className="cap-tag">IA Tools</span>
                           </div>
                         </div>
                       </div>
