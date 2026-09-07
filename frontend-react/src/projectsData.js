@@ -198,17 +198,17 @@ export const ALL_PROJECTS = [
     title: 'Cesida ✦ Rediseño de Identidad',
     category: 'Identidad & Branding',
     categoryKey: 'design',
-    description: 'Rediseño de la identidad visual y sistema de marca para la coordinadora estatal CESIDA, aportando cercanía, claridad y un impacto visual contemporáneo.',
+    description: 'Rediseño integral de la identidad visual y del ecosistema de marca para CESIDA, transformando su comunicación institucional en un lenguaje cercano, empático y de alto impacto contemporáneo.',
     technologies: ['Branding', 'Identidad Visual', 'Motion Graphics', 'Experiencia UX/UI'],
     link: '',
     client: 'CESIDA (Coordinadora Estatal de VIH y Sida)',
     year: '2025',
     role: 'Diseñador de Identidad & Web / UX/UI',
-    tagline: 'Rediseño institucional y sistema gráfico dinámico',
+    tagline: 'Nuevo sistema visual, dinamismo y cercanía para la mayor red estatal de VIH',
     details: [
-      'Rediseño completo de la identidad visual de la coordinadora CESIDA. La propuesta busca modernizar la comunicación institucional de la organización, dotándola de una voz gráfica clara, optimista y comprometida.',
-      'El sistema se basa en la simplificación del logotipo y el uso de una paleta tipográfica y cromática vibrante que facilita su aplicación tanto en soportes físicos como digitales.',
-      'El proyecto incluye el diseño de la guía de estilo de marca, cartelería de campañas, mupis animados para redes sociales y plantillas corporativas para las distintas sedes de la coordinadora.'
+      'Rediseño integral de la identidad visual de CESIDA, la organización más representativa en el ámbito del VIH en España. El desafío radicaba en despojar a la comunicación institucional de su frialdad tradicional, construyendo un universo gráfico que proyecte cercanía, empatía y un activismo positivo capaz de conectar con nuevas generaciones y derribar estigmas.',
+      'El nuevo sistema se articula sobre una síntesis tipográfica rotunda y una paleta cromática enérgica que aporta calidez y legibilidad tanto en soportes físicos como en entornos digitales. La identidad cobra vida mediante recursos gráficos flexibles y patrones dinámicos que se adaptan con agilidad a la diversidad de mensajes de la entidad.',
+      'El proyecto abarca el desarrollo de la guía de estilo de marca, cartelería de campañas de concienciación, piezas animadas para mupis y redes sociales, así como un sistema de plantillas corporativas modulares para unificar la comunicación de las distintas sedes en todo el territorio.'
     ],
     gallery: [
       { url: cesidaIdVertical1, type: 'half-width' },
@@ -229,11 +229,12 @@ export const ALL_PROJECTS = [
     link: '',
     client: 'Proyecto Personal / Autoedición',
     year: '2025',
-    role: 'Diseño Editorial, Ilustración & Maquetación',
+    role: 'Diseñador Editorial & Ilustrador',
     tagline: 'Un libro visual dedicado al dulce arte de la tarta de queso',
     details: [
       'Diseño editorial e ilustración del libro Cheesecake World, un proyecto que celebra el universo de la tarta de queso desde una mirada gráfica y contemporánea. La cubierta combina una paleta cromática sobria con ilustraciones sintéticas y repetitivas, creando un patrón reconocible y lúdico que refuerza el carácter del libro.',
-      'El diseño busca convertir la publicación en un objeto atractivo y coleccionable, donde la ilustración y la tipografía dialogan para transmitir cercanía, identidad y coherencia visual, acompañando el contenido de forma clara y sugerente.El diseño busca convertir la publicación en un objeto atractivo y coleccionable, donde la ilustración y la tipografía dialogan para transmitir cercanía, identidad y coherencia visual, acompañando el contenido de forma clara y sugerente.'
+      'En el interior, la maquetación se estructura a partir de una retícula limpia y equilibrada que da protagonismo tanto a las recetas como a los despieces visuales. Cada doble página combina una tipografía cuidada con composiciones claras que aportan dinamismo a la lectura.',
+      'La propuesta busca transformar la publicación en una pieza atractiva y coleccionable, donde la ilustración y el diseño editorial dialogan para transmitir cercanía, identidad y coherencia visual en cada detalle.'
     ],
     gallery: [
       { url: cheesecakeWorldVertical1, type: 'half-width' },
