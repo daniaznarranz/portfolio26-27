@@ -73,8 +73,8 @@ export const ALL_PROJECTS = [
     image: libroEspeculativoHorizontal1,
     video: libroEspeculativoVideoPrincipal,
     title: 'Guía Práctica para recuperar los libros ✦ Proyecto Especulativo',
-    category: 'Editorial & Impresos',
-    categoryKey: 'editorial',
+    category: 'Diseño Web & Editorial',
+    categoryKey: ['editorial', 'digital'],
     description: 'Diseño editorial y desarrollo interactivo para un libro especulativo centrado en la recuperación de la memoria impresa y el valor del papel.',
     technologies: ['Editorial', 'Desarrollo Web', 'Diseño Especulativo', 'Automatización', 'Chatbot'],
     link: 'https://guia-practica-de-un-libro.vercel.app/',
@@ -173,7 +173,7 @@ export const ALL_PROJECTS = [
   {
     image: inputPortada,
     title: 'Input ✦ Revista de la ESD',
-    category: 'Editorial & Impresos',
+    category: 'Editorial',
     categoryKey: 'editorial',
     description: 'Diseño, maquetación y desarrollo visual para Input, una revista autoeditada por y para estudiantes de la Escuela Superior de Diseño (ESD) de Madrid.',
     technologies: ['Editorial', 'Diseño de Información', 'InDesign'],
@@ -222,7 +222,7 @@ export const ALL_PROJECTS = [
   {
     image: cheesecakeWorldPrincipal,
     title: 'Cheesecake World ✦ Libro de Maquetación e Ilustración',
-    category: 'Editorial & Impresos',
+    category: 'Editorial',
     categoryKey: 'editorial',
     description: 'Diseño, maquetación e ilustración para Cheesecake World, un libro visual que explora el universo de las tartas de queso a través de composiciones gráficas detalladas y narrativa visual gastronómica.',
     technologies: ['Editorial', 'Ilustración', 'Diseño Visual'],
@@ -246,7 +246,7 @@ export const ALL_PROJECTS = [
   {
     image: bmCoffee1,
     title: 'Café BM ✦ Rediseño de Packaging',
-    category: 'Packaging & Ilustración',
+    category: 'Packaging',
     categoryKey: 'packaging',
     description: 'Rediseño de la línea de café de marca blanca para BM Supermercados, apostando por una identidad limpia, tipografía contemporánea y un código de color claro para diferenciar las distintas variedades.',
     technologies: ['Packaging', 'Branding', 'Diseño de Producto (Físico)', 'Ilustración'],
@@ -270,7 +270,7 @@ export const ALL_PROJECTS = [
   {
     image: salsaGoikoPrincipal,
     title: 'Salsas Goiko ✦ Rediseño de Packaging',
-    category: 'Packaging & Ilustración',
+    category: 'Packaging',
     categoryKey: 'packaging',
     description: 'Rediseño de la gama de salsas para llevar de la conocida cadena de hamburgueserías Goiko, potenciando su identidad atrevida y gamberra.',
     technologies: ['Packaging', 'Branding', 'Diseño de Producto (Físico)', 'Ilustración'],

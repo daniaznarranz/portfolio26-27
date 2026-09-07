@@ -175,11 +175,11 @@ function App() {
     }
   };
 
-  // Keyboard navigation: Escape returns to landing page
+  // Keyboard navigation: Escape returns to landing page from top-level views (e.g. projects archive or cv)
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') {
-        if (currentView !== 'landing') {
+        if (currentView === 'projects' || currentView === 'cv') {
           navigateTo('landing');
         }
       }

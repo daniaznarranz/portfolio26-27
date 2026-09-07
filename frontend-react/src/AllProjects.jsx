@@ -13,7 +13,11 @@ export default function AllProjects({ navigateTo, onSelectProject }) {
 
   const filteredProjects = activeCategory === 'todos'
     ? ALL_PROJECTS
-    : ALL_PROJECTS.filter(project => project.categoryKey === activeCategory);
+    : ALL_PROJECTS.filter(project =>
+        Array.isArray(project.categoryKey)
+          ? project.categoryKey.includes(activeCategory)
+          : project.categoryKey === activeCategory
+      );
 
   useGSAP(() => {
     // Settle dynamic entry transition for filtered items

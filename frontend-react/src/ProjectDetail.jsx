@@ -46,12 +46,15 @@ export default function ProjectDetail({ project, navigateTo, onSelectProject }) 
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [project]);
 
-  // Keyboard navigation: ArrowLeft / ArrowRight to switch projects, Escape to close lightbox
+  // Keyboard navigation: ArrowLeft / ArrowRight to switch projects, Escape to close lightbox or return to projects
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === 'Escape' && activeImage) {
-        setActiveImage(null);
-        e.stopPropagation();
+      if (e.key === 'Escape') {
+        if (activeImage) {
+          setActiveImage(null);
+        } else {
+          navigateTo('projects');
+        }
       } else if (e.key === 'ArrowLeft' && !activeImage && prevProject && onSelectProject) {
         onSelectProject(prevProject);
       } else if (e.key === 'ArrowRight' && !activeImage && nextProject && onSelectProject) {
@@ -60,7 +63,7 @@ export default function ProjectDetail({ project, navigateTo, onSelectProject }) 
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [activeImage, prevProject, nextProject, onSelectProject]);
+  }, [activeImage, prevProject, nextProject, onSelectProject, navigateTo]);
 
   // Check if project has a video or if the image is a video URL
   const isVideo = project.video || (project.image && (project.image.endsWith('.mp4') || project.image.includes('video')));
@@ -83,7 +86,7 @@ export default function ProjectDetail({ project, navigateTo, onSelectProject }) 
           <button onClick={() => navigateTo('projects')} className="back-btn" aria-label="Volver a Proyectos (Esc)">
             <ArrowLeft size={18} /> Volver a Proyectos
           </button>
-          <span className="keyboard-nav-hint">Usa las teclas ← / → para navegar entre proyectos o Esc para salir</span>
+          <span className="keyboard-nav-hint">Usa las teclas ← / → para navegar entre proyectos o Esc para volver a proyectos</span>
         </nav>
 
         {/* Hero Header Area (Title left, Subtitle right) */}
